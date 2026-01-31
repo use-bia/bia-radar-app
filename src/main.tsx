@@ -10,11 +10,13 @@ import "./styles.css";
 import reportWebVitals from "./reportWebVitals.ts";
 import { applyTheme, getSystemTheme } from "./theme.ts";
 import { ThemeProvider } from "./contexts/ThemeContext.tsx";
+import { audioEngine } from "./audio/audioEngine.ts";
 
 const storedTheme = localStorage.getItem("theme") as "dark" | "light" | null;
 const theme = storedTheme ?? getSystemTheme();
 
 applyTheme(theme);
+audioEngine.init();
 
 // Create a new router instance
 const router = createRouter({
