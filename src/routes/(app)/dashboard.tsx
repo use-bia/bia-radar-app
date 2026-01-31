@@ -8,8 +8,8 @@ export const Route = createFileRoute("/(app)/dashboard")({
 
 function RouteComponent() {
   return (
-    <div className="bg-black">
-      <Card className="w-[400px]">
+    <div>
+      <Card className="border">
         <BadgeDollarSign
           aria-label="Badge dollar sign icon"
           className="text-primary size-6"
