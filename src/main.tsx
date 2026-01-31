@@ -8,6 +8,13 @@ import { routeTree } from "./routeTree.gen";
 
 import "./styles.css";
 import reportWebVitals from "./reportWebVitals.ts";
+import { applyTheme, getSystemTheme } from "./theme.ts";
+import { ThemeProvider } from "./contexts/ThemeContext.tsx";
+
+const storedTheme = localStorage.getItem("theme") as "dark" | "light" | null;
+const theme = storedTheme ?? getSystemTheme();
+
+applyTheme(theme);
 
 // Create a new router instance
 const router = createRouter({
@@ -33,7 +40,9 @@ if (rootElement && !rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
     <StrictMode>
-      <RouterProvider router={router} />
+      <ThemeProvider>
+        <RouterProvider router={router} />
+      </ThemeProvider>
     </StrictMode>,
   );
 }

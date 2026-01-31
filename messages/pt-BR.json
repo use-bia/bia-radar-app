@@ -1,4 +1,5 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
-  "example_message": "Olá usuário: {username}"
+  "example_message": "Olá usuário: {username}",
+  "toggle_theme": "Alternar tema"
 }
