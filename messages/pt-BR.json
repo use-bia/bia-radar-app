@@ -4,5 +4,7 @@
   "toggle_theme": "Alternar tema",
   "en_dis_sounds": "{status} efeitos sonoros",
   "enable": "Ativar",
-  "disable": "Desativar"
+  "disable": "Desativar",
+  "connect_via_bluetooth": "Conectar via Bluetooth®",
+  "connect_via_usb": "Conectar via USB"
 }

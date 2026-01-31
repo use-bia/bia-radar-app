@@ -11,7 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as appRouteRouteImport } from './routes/(app)/route'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as AboutIndexRouteImport } from './routes/about/index'
+import { Route as ConnectionIndexRouteImport } from './routes/connection/index'
 import { Route as appDashboardRouteImport } from './routes/(app)/dashboard'
 
 const appRouteRoute = appRouteRouteImport.update({
@@ -23,9 +23,9 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AboutIndexRoute = AboutIndexRouteImport.update({
-  id: '/about/',
-  path: '/about/',
+const ConnectionIndexRoute = ConnectionIndexRouteImport.update({
+  id: '/connection/',
+  path: '/connection/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const appDashboardRoute = appDashboardRouteImport.update({
@@ -37,32 +37,32 @@ const appDashboardRoute = appDashboardRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/dashboard': typeof appDashboardRoute
-  '/about/': typeof AboutIndexRoute
+  '/connection/': typeof ConnectionIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/dashboard': typeof appDashboardRoute
-  '/about': typeof AboutIndexRoute
+  '/connection': typeof ConnectionIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/(app)': typeof appRouteRouteWithChildren
   '/(app)/dashboard': typeof appDashboardRoute
-  '/about/': typeof AboutIndexRoute
+  '/connection/': typeof ConnectionIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dashboard' | '/about/'
+  fullPaths: '/' | '/dashboard' | '/connection/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dashboard' | '/about'
-  id: '__root__' | '/' | '/(app)' | '/(app)/dashboard' | '/about/'
+  to: '/' | '/dashboard' | '/connection'
+  id: '__root__' | '/' | '/(app)' | '/(app)/dashboard' | '/connection/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   appRouteRoute: typeof appRouteRouteWithChildren
-  AboutIndexRoute: typeof AboutIndexRoute
+  ConnectionIndexRoute: typeof ConnectionIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -81,11 +81,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/about/': {
-      id: '/about/'
-      path: '/about'
-      fullPath: '/about/'
-      preLoaderRoute: typeof AboutIndexRouteImport
+    '/connection/': {
+      id: '/connection/'
+      path: '/connection'
+      fullPath: '/connection/'
+      preLoaderRoute: typeof ConnectionIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/(app)/dashboard': {
@@ -113,7 +113,7 @@ const appRouteRouteWithChildren = appRouteRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   appRouteRoute: appRouteRouteWithChildren,
-  AboutIndexRoute: AboutIndexRoute,
+  ConnectionIndexRoute: ConnectionIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

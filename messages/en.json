@@ -4,5 +4,7 @@
   "toggle_theme": "Toggle theme",
   "en_dis_sounds": "{status} sound effects",
   "enable": "Enable",
-  "disable": "Disable"
+  "disable": "Disable",
+  "connect_via_bluetooth": "Connect via Bluetooth®",
+  "connect_via_usb": "Connect via USB"
 }
