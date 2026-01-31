@@ -1,5 +1,8 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
   "example_message": "Olá usuário: {username}",
-  "toggle_theme": "Alternar tema"
+  "toggle_theme": "Alternar tema",
+  "en_dis_sounds": "{status} efeitos sonoros",
+  "enable": "Ativar",
+  "disable": "Desativar"
 }

@@ -11,6 +11,7 @@ import reportWebVitals from "./reportWebVitals.ts";
 import { applyTheme, getSystemTheme } from "./theme.ts";
 import { ThemeProvider } from "./contexts/ThemeContext.tsx";
 import { audioEngine } from "./audio/audioEngine.ts";
+import { AudioSettingsProvider } from "./contexts/AudioSettingsContext.tsx";
 
 const storedTheme = localStorage.getItem("theme") as "dark" | "light" | null;
 const theme = storedTheme ?? getSystemTheme();
@@ -43,7 +44,9 @@ if (rootElement && !rootElement.innerHTML) {
   root.render(
     <StrictMode>
       <ThemeProvider>
-        <RouterProvider router={router} />
+        <AudioSettingsProvider>
+          <RouterProvider router={router} />
+        </AudioSettingsProvider>
       </ThemeProvider>
     </StrictMode>,
   );

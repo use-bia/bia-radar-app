@@ -1,5 +1,4 @@
-import { useAudio } from "@/hooks/useAudio";
-import { Button, Card, Link } from "@heroui/react";
+import { Card, Link } from "@heroui/react";
 import { createFileRoute } from "@tanstack/react-router";
 import { BadgeDollarSign } from "lucide-react";
 
