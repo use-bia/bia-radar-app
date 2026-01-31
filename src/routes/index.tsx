@@ -1,15 +1,13 @@
-import { createFileRoute } from '@tanstack/react-router'
-import logo from '../logo.svg'
-import { Button } from '@heroui/react'
-import { getLocale, setLocale } from "@/paraglide/runtime.js";
+import { createFileRoute } from "@tanstack/react-router";
+import logo from "../logo.svg";
+import { Button } from "@heroui/react";
 import { m } from "@/paraglide/messages.js";
 
-export const Route = createFileRoute('/')({
+export const Route = createFileRoute("/")({
   component: App,
-})
+});
 
 function App() {
-  setLocale("en"); // switches to German
   return (
     <div className="text-center">
       <header className="min-h-screen flex flex-col items-center justify-center bg-[#282c34] text-white text-[calc(10px+2vmin)]">
@@ -42,5 +40,5 @@ function App() {
         {m.example_message({ username: "Inlang" })}
       </Button>
     </div>
-  )
+  );
 }
