@@ -1,3 +1,4 @@
+import FixedTogglers from "@/components/FixedTogglers";
 import { m } from "@/paraglide/messages.js";
 import { Button } from "@heroui/react";
 import { createFileRoute } from "@tanstack/react-router";
@@ -11,6 +12,10 @@ export const Route = createFileRoute("/connection/")({
 function RouteComponent() {
   return (
     <div className="w-full min-h-dvh flex flex-col items-center p-4">
+      <div className="w-full flex justify-end mb-4">
+        <FixedTogglers />
+      </div>
+
       <div className="flex-1 flex flex-col items-center justify-center w-full">
         <motion.div
           animate={{
@@ -26,9 +31,9 @@ function RouteComponent() {
           </div>
         </motion.div>
 
-        <h2 className="text-3xl font-light tracking-widest text-center uppercase">
+        <h1 className="text-3xl font-light tracking-widest text-center uppercase">
           {m.bia_radar()}
-        </h2>
+        </h1>
         <p className="text-muted text-[10px] font-bold uppercase tracking-[0.6em] mt-4 text-center">
           {m.synchronizing_hardware()}
         </p>

@@ -9,13 +9,14 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as appRouteRouteImport } from './routes/(app)/route'
+import { Route as DashboardRouteRouteImport } from './routes/dashboard/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
 import { Route as ConnectionIndexRouteImport } from './routes/connection/index'
-import { Route as appDashboardRouteImport } from './routes/(app)/dashboard'
 
-const appRouteRoute = appRouteRouteImport.update({
-  id: '/(app)',
+const DashboardRouteRoute = DashboardRouteRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -23,55 +24,56 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardIndexRoute = DashboardIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => DashboardRouteRoute,
+} as any)
 const ConnectionIndexRoute = ConnectionIndexRouteImport.update({
   id: '/connection/',
   path: '/connection/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const appDashboardRoute = appDashboardRouteImport.update({
-  id: '/dashboard',
-  path: '/dashboard',
-  getParentRoute: () => appRouteRoute,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/dashboard': typeof appDashboardRoute
+  '/dashboard': typeof DashboardRouteRouteWithChildren
   '/connection/': typeof ConnectionIndexRoute
+  '/dashboard/': typeof DashboardIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/dashboard': typeof appDashboardRoute
   '/connection': typeof ConnectionIndexRoute
+  '/dashboard': typeof DashboardIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/(app)': typeof appRouteRouteWithChildren
-  '/(app)/dashboard': typeof appDashboardRoute
+  '/dashboard': typeof DashboardRouteRouteWithChildren
   '/connection/': typeof ConnectionIndexRoute
+  '/dashboard/': typeof DashboardIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dashboard' | '/connection/'
+  fullPaths: '/' | '/dashboard' | '/connection/' | '/dashboard/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dashboard' | '/connection'
-  id: '__root__' | '/' | '/(app)' | '/(app)/dashboard' | '/connection/'
+  to: '/' | '/connection' | '/dashboard'
+  id: '__root__' | '/' | '/dashboard' | '/connection/' | '/dashboard/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  appRouteRoute: typeof appRouteRouteWithChildren
+  DashboardRouteRoute: typeof DashboardRouteRouteWithChildren
   ConnectionIndexRoute: typeof ConnectionIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/(app)': {
-      id: '/(app)'
-      path: ''
-      fullPath: ''
-      preLoaderRoute: typeof appRouteRouteImport
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -81,6 +83,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard/': {
+      id: '/dashboard/'
+      path: '/'
+      fullPath: '/dashboard/'
+      preLoaderRoute: typeof DashboardIndexRouteImport
+      parentRoute: typeof DashboardRouteRoute
+    }
     '/connection/': {
       id: '/connection/'
       path: '/connection'
@@ -88,31 +97,24 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ConnectionIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/(app)/dashboard': {
-      id: '/(app)/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof appDashboardRouteImport
-      parentRoute: typeof appRouteRoute
-    }
   }
 }
 
-interface appRouteRouteChildren {
-  appDashboardRoute: typeof appDashboardRoute
+interface DashboardRouteRouteChildren {
+  DashboardIndexRoute: typeof DashboardIndexRoute
 }
 
-const appRouteRouteChildren: appRouteRouteChildren = {
-  appDashboardRoute: appDashboardRoute,
+const DashboardRouteRouteChildren: DashboardRouteRouteChildren = {
+  DashboardIndexRoute: DashboardIndexRoute,
 }
 
-const appRouteRouteWithChildren = appRouteRoute._addFileChildren(
-  appRouteRouteChildren,
+const DashboardRouteRouteWithChildren = DashboardRouteRoute._addFileChildren(
+  DashboardRouteRouteChildren,
 )
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  appRouteRoute: appRouteRouteWithChildren,
+  DashboardRouteRoute: DashboardRouteRouteWithChildren,
   ConnectionIndexRoute: ConnectionIndexRoute,
 }
 export const routeTree = rootRouteImport

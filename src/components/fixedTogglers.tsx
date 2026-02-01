@@ -14,9 +14,11 @@ const FixedTogglers: FunctionComponent<FixedTogglersProps> = () => {
   const { enabled: enabledAudio, toggle: toggleAudio } = useAudioSettings();
 
   return (
-    <div className="absolute top-0 right-0 p-6 gap-2 flex z-50">
+    <div className="flex gap-2">
       <Tooltip>
         <Button
+          isIconOnly
+          size="lg"
           variant="tertiary"
           onClick={() => {
             toggle();
@@ -38,6 +40,8 @@ const FixedTogglers: FunctionComponent<FixedTogglersProps> = () => {
       </Tooltip>
       <Tooltip>
         <Button
+          isIconOnly
+          size="lg"
           variant="tertiary"
           onClick={() => {
             toggleAudio();
