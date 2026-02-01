@@ -33,6 +33,57 @@ function RouteComponent() {
           This is the main area where you can view and manage your data.
         </Card.Content>
       </Card>
+      <GlassCard className="aspect-square col-span-2">
+        <div className="flex flex-col items-center justify-center h-full">
+          <Button
+            isIconOnly
+            variant="secondary"
+            className="w-40 h-40 rounded-full border"
+          >
+            <Volume2Icon className="w-16 h-16" />
+          </Button>
+          <div className="flex flex-col items-center mt-10 text-center space-y-4">
+            <h3 className="text-2xl">Localizar BIA-RADAR</h3>
+            <p className="text-muted">
+              Use este botão para emitir um sinal sonoro no dispositivo.
+            </p>
+          </div>
+        </div>
+      </GlassCard>
+      <GlassCard className="aspect-square col-span-2">
+        <div className="flex flex-col items-center justify-center h-full">
+          <Button
+            isIconOnly
+            variant="secondary"
+            className="w-40 h-40 rounded-full border"
+          >
+            <Volume2Icon className="w-16 h-16" />
+          </Button>
+          <div className="flex flex-col items-center mt-10 text-center space-y-4">
+            <h3 className="text-2xl">Localizar BIA-RADAR</h3>
+            <p className="text-muted">
+              Use este botão para emitir um sinal sonoro no dispositivo.
+            </p>
+          </div>
+        </div>
+      </GlassCard>
+      <GlassCard className="aspect-square col-span-2">
+        <div className="flex flex-col items-center justify-center h-full">
+          <Button
+            isIconOnly
+            variant="secondary"
+            className="w-40 h-40 rounded-full border"
+          >
+            <Volume2Icon className="w-16 h-16" />
+          </Button>
+          <div className="flex flex-col items-center mt-10 text-center space-y-4">
+            <h3 className="text-2xl">Localizar BIA-RADAR</h3>
+            <p className="text-muted">
+              Use este botão para emitir um sinal sonoro no dispositivo.
+            </p>
+          </div>
+        </div>
+      </GlassCard>
     </div>
   );
 }

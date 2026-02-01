@@ -38,6 +38,7 @@
   --success-foreground: oklch(21.03% 0.0059 139.78);
   --surface: oklch(100% 0 161.95);
   --surface-foreground: oklch(21.03% 0.0059 161.95);
+  --surface-overlay: #f5f5f4;
   --warning: oklch(78.19% 0.1585 61.3);
   --warning-foreground: oklch(21.03% 0.0059 61.3);
 
@@ -77,8 +78,9 @@
   --separator: oklch(25% 0 161.95);
   --success: oklch(73.29% 0.1935 139.78);
   --success-foreground: oklch(21.03% 0.0059 139.78);
-  --surface: rgba(18, 18, 17, 1);
+  --surface: #1c1917;
   --surface-foreground: oklch(99.11% 0 0);
+  --surface-overlay: #282523;
   --warning: oklch(82.03% 0.1388 65.31);
   --warning-foreground: oklch(21.03% 0.0059 65.31);
 }
@@ -96,6 +98,7 @@
   --field-placeholder: #ffffff;
   --surface: #000000;
   --surface-foreground: #ffffff;
+  --surface-overlay: #000000;
   --overlay: #000000;
   --overlay-foreground: #ffffff;
   --danger: #ffff00;
@@ -110,6 +113,10 @@
   --default-foreground: #ffffff;
   --radius: 0px;
   --field-radius: 0px;
+}
+
+@theme inline {
+  --color-surface-overlay: var(--surface-overlay);
 }
 
 /* Sets the base background color for the page */
