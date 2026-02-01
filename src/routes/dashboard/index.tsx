@@ -1,6 +1,6 @@
 // src/routes/dashboard/index.tsx
 import { createFileRoute } from "@tanstack/react-router";
-import { GlassCard } from "@/components/ui/GlassCard";
+import { GlassCard } from "@/components/GlassCard";
 import { Card } from "@heroui/react";
 
 export const Route = createFileRoute("/dashboard/")({

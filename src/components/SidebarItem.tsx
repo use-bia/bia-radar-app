@@ -1,3 +1,4 @@
+import { useAudio } from "@/hooks/useAudio";
 import { cn } from "@heroui/react";
 import type { FunctionComponent, ReactNode } from "react";
 
@@ -12,6 +13,8 @@ const SidebarItem: FunctionComponent<SidebarItemProps> = ({
   children,
   className,
 }) => {
+  const playSwitchTabs = useAudio("switch_tabs");
+
   return (
     <div
       className={cn(
@@ -22,6 +25,11 @@ const SidebarItem: FunctionComponent<SidebarItemProps> = ({
           : "text-foreground/70 hover:bg-default-100 hover:text-foreground",
         className,
       )}
+      onClick={() => {
+        if (!isActive) {
+          playSwitchTabs();
+        }
+      }}
     >
       {children}
     </div>
