@@ -8,6 +8,7 @@ import {
   DownloadIcon,
   MoonIcon,
   SunIcon,
+  ContrastIcon,
   Volume2Icon,
   VolumeOffIcon,
 } from "lucide-react";
@@ -28,6 +29,20 @@ const HeaderButtons: FunctionComponent<HeaderButtonsProps> = () => {
 
   // Text hidden on mobile, visible on md+
   const responsiveTextClass = "hidden lg:inline-block ml-2";
+
+  // Helpers to determine the label and icon for the NEXT state
+  // Cycle: Light -> Dark -> High Contrast -> Light
+  const getNextThemeLabel = () => {
+    if (theme === "light") return m.dark_mode();
+    if (theme === "dark") return m.high_contrast();
+    return m.light_mode();
+  };
+
+  const getNextThemeIcon = () => {
+    if (theme === "light") return <MoonIcon size={20} />;
+    if (theme === "dark") return <ContrastIcon size={20} />;
+    return <SunIcon size={20} />;
+  };
 
   return (
     <div className="flex gap-2">
@@ -61,19 +76,16 @@ const HeaderButtons: FunctionComponent<HeaderButtonsProps> = () => {
             playToggle();
           }}
           aria-label={m.toggle_theme_to({
-            theme: theme === "light" ? m.dark_mode() : m.light_mode(),
+            theme: getNextThemeLabel(),
           })}
-          aria-pressed={theme === "dark"}
         >
-          {theme === "light" ? <SunIcon size={20} /> : <MoonIcon size={20} />}
-          <span className={responsiveTextClass}>
-            {theme === "light" ? m.dark_mode() : m.light_mode()}
-          </span>
+          {getNextThemeIcon()}
+          <span className={responsiveTextClass}>{getNextThemeLabel()}</span>
         </Button>
         <Tooltip.Content>
           <Tooltip.Arrow />
           {m.toggle_theme_to({
-            theme: theme === "light" ? m.dark_mode() : m.light_mode(),
+            theme: getNextThemeLabel(),
           })}
         </Tooltip.Content>
       </Tooltip>

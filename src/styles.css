@@ -83,6 +83,35 @@
   --warning-foreground: oklch(21.03% 0.0059 65.31);
 }
 
+[data-theme="high-contrast"] {
+  color-scheme: dark;
+
+  --background: #000000;
+  --foreground: #ffffff;
+  --border: #ffffff;
+  --accent: #ffffff;
+  --accent-foreground: #000000;
+  --field-background: #000000;
+  --field-foreground: #ffffff;
+  --field-placeholder: #ffffff;
+  --surface: #000000;
+  --surface-foreground: #ffffff;
+  --overlay: #000000;
+  --overlay-foreground: #ffffff;
+  --danger: #ffff00;
+  --danger-foreground: #000000;
+  --success: #00ff00;
+  --success-foreground: #000000;
+  --warning: #00ffff;
+  --warning-foreground: #000000;
+  --muted: #ffffff;
+  --focus: #ffff00;
+  --default: #000000;
+  --default-foreground: #ffffff;
+  --radius: 0px;
+  --field-radius: 0px;
+}
+
 /* Sets the base background color for the page */
 body {
   background-color: var(--background);

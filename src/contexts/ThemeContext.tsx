@@ -1,7 +1,8 @@
 import { createContext, useContext, useState } from "react";
 import { applyTheme } from "@/theme";
 
-type Theme = "dark" | "light";
+// 1. Add 'high-contrast' to the type
+type Theme = "dark" | "light" | "high-contrast";
 
 const ThemeContext = createContext<{
   theme: Theme;
@@ -14,7 +15,16 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   );
 
   const toggle = () => {
-    const next = theme === "dark" ? "light" : "dark";
+    // 2. Update cycle logic: Light -> Dark -> High Contrast -> Light
+    let next: Theme;
+    if (theme === "light") {
+      next = "dark";
+    } else if (theme === "dark") {
+      next = "high-contrast";
+    } else {
+      next = "light";
+    }
+
     setTheme(next);
     localStorage.setItem("theme", next);
     applyTheme(next);
