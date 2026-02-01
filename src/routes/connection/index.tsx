@@ -26,11 +26,11 @@ function RouteComponent() {
           </div>
         </motion.div>
 
-        <h2 className="text-3xl font-light tracking-widest text-center">
-          BIA RADAR
+        <h2 className="text-3xl font-light tracking-widest text-center uppercase">
+          {m.bia_radar()}
         </h2>
         <p className="text-stone-600 text-[10px] font-bold uppercase tracking-[0.6em] mt-4 text-center">
-          Sincronizando Hardware
+          {m.synchronizing_hardware()}
         </p>
       </div>
 

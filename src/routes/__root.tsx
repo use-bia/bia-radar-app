@@ -1,10 +1,12 @@
 import { Outlet, createRootRoute } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { TanStackDevtools } from "@tanstack/react-devtools";
+import FixedTogglers from "@/components/fixedTogglers";
 
 export const Route = createRootRoute({
   component: () => (
     <>
+      <FixedTogglers />
       <Outlet />
       <TanStackDevtools
         config={{
