@@ -8,7 +8,7 @@ import {
 import { AmbientBackground } from "@/components/AmbientBackground";
 import HeaderButtons from "@/components/HeaderButtons";
 import { m } from "@/paraglide/messages";
-import { PlayIcon, RadioIcon, SettingsIcon } from "lucide-react";
+import { MonitorPlayIcon, RadioIcon, SettingsIcon } from "lucide-react";
 import { Button } from "@heroui/react";
 import SidebarItem from "@/components/SidebarItem";
 import { useAudio } from "@/hooks/useAudio";
@@ -26,7 +26,7 @@ const options = linkOptions([
   {
     to: "/dashboard/guides",
     label: m.video_guide(),
-    icon: <PlayIcon aria-hidden="true" className="mr-2 w-6 h-6" />,
+    icon: <MonitorPlayIcon aria-hidden="true" className="mr-2 w-6 h-6" />,
     activeOptions: {
       exact: false,
     },
@@ -97,7 +97,7 @@ function RouteComponent() {
       </nav>
 
       <main className="relative w-full min-h-dvh flex justify-center">
-        <div className="z-1 px-6 pt-6 w-full max-w-4xl">
+        <div className="z-1 px-8 sm:px-12 md:px-6 pt-10 w-full max-w-5xl">
           <header className="mb-8 flex items-center justify-between">
             <div className="space-y-2">
               <h1 className="text-3xl font-semibold">{currentOption?.label}</h1>

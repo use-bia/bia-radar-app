@@ -60,7 +60,8 @@
   --border: oklch(28% 0 161.95);
   --danger: oklch(59.4% 0.1967 13.6);
   --danger-foreground: oklch(99.11% 0 0);
-  --default: oklch(27.4% 0 161.95);
+  /* --default: oklch(27.4% 0 161.95); */
+  --default: oklch(0.2161 0.0061 56.04);
   --default-foreground: oklch(99.11% 0 0);
   --field-background: oklch(21.03% 0 161.95);
   --field-foreground: oklch(99.11% 0 0);

@@ -23,7 +23,8 @@ const HeaderButtons: FunctionComponent<HeaderButtonsProps> = () => {
 
   // 1. Mobile (default): h-12 w-12 (Large), px-0 (Icon Only look)
   // 2. Desktop (sm:):    h-10 (Medium), w-auto (Text fits), px-4 (Standard padding)
-  const responsiveBtnClass = "h-12 w-12 min-w-0 px-0 lg:h-10 lg:w-auto lg:px-4";
+  const responsiveBtnClass =
+    "h-12 w-12 min-w-0 px-0 lg:h-10 lg:w-auto lg:px-4 border";
 
   // Text hidden on mobile, visible on md+
   const responsiveTextClass = "hidden lg:inline-block ml-2";
