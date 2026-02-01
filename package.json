@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.1",
   "type": "module",
-  "homepage": "https://use-bia.github.io/bia-radar-app/",
+  "homepage": "https://app.biaradar.com",
   "scripts": {
     "dev": "vite --port 3000",
     "build": "vite build && tsc",

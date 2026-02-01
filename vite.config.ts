@@ -10,7 +10,7 @@ import { fileURLToPath, URL } from "node:url";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: "/bia-radar-app/",
+  base: "/",
 
   plugins: [
     paraglideVitePlugin({

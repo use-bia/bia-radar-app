@@ -1,4 +1,5 @@
 import HeaderButtons from "@/components/HeaderButtons";
+import { useAudio } from "@/hooks/useAudio";
 import { m } from "@/paraglide/messages.js";
 import { Button, Spinner } from "@heroui/react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
@@ -12,6 +13,8 @@ export const Route = createFileRoute("/connect/")({
 
 function RouteComponent() {
   const navigate = useNavigate();
+    const playDeviceConnected = useAudio("device_connected");
+  
   return (
     <div className="w-full min-h-dvh flex flex-col items-center p-4">
       <div className="w-full flex justify-end mb-4">
@@ -46,7 +49,10 @@ function RouteComponent() {
           variant="primary"
           className="w-full font-bold h-14 capitalize"
           size="lg"
-          onClick={() => navigate({ to: "/dashboard" })}
+          onClick={() => {
+            playDeviceConnected();
+            navigate({ to: "/dashboard" });
+          }}
         >
           {m.connect_via_bluetooth()}
         </Button>
@@ -54,7 +60,10 @@ function RouteComponent() {
           variant="secondary"
           className="w-full font-bold h-14 capitalize"
           size="lg"
-          onClick={() => navigate({ to: "/dashboard" })}
+          onClick={()=>{
+            playDeviceConnected();
+            navigate({ to: "/dashboard" });
+          }}
         >
           {m.connect_via_usb()}
         </Button>
