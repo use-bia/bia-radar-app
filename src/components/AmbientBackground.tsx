@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 export const AmbientBackground = () => {
   return (
-    <div className="absolute inset-0 w-full min-h-full overflow-hidden bg-background pointer-events-none">
+    <div className="absolute inset-0 w-full min-h-full overflow-hidden bg-background pointer-events-none high-contrast:hidden">
       {/* 1. CLEAN NOISE OVERLAY */}
       <div
         className="absolute inset-0 opacity-[0.1] mix-blend-overlay"

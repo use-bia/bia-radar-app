@@ -18,7 +18,7 @@ const FloatingNavBarItem: FunctionComponent<FloatingNavBarItemProps> = ({
         "px-12 h-15 flex items-center justify-center rounded-full transition-colors duration-200 select-none",
         "group-focus-visible:ring-2 group-focus-visible:ring-focus group-focus-visible:ring-offset-2 group-focus-visible:ring-offset-background",
         isActive
-          ? "bg-surface-overlay text-accent opacity-100"
+          ? "bg-surface-overlay text-accent opacity-100 border"
           : "text-foreground/70 hover:bg-default-100 hover:text-foreground",
         className,
       )}

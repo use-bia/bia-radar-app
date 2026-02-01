@@ -44,6 +44,7 @@
 
   /* Border Radius */
   --radius: 0.25rem;
+  --glass-radius: 2.5rem;
   --field-radius: 0.75rem;
 
   /* Font Family */
@@ -113,11 +114,14 @@
   --default-foreground: #ffffff;
   --radius: 0px;
   --field-radius: 0px;
+  --glass-radius: 0px;
 }
 
 @theme inline {
   --color-surface-overlay: var(--surface-overlay);
 }
+
+@custom-variant high-contrast (&:where([data-theme="high-contrast"] *));
 
 /* Sets the base background color for the page */
 body {
