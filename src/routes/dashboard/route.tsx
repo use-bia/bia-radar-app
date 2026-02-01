@@ -6,17 +6,18 @@ import {
   useLocation,
 } from "@tanstack/react-router";
 import { AmbientBackground } from "@/components/AmbientBackground";
-import FixedTogglers from "@/components/FixedTogglers";
+import HeaderButtons from "@/components/HeaderButtons";
 import { m } from "@/paraglide/messages";
 import { PlayIcon, RadioIcon, SettingsIcon } from "lucide-react";
 import { Button } from "@heroui/react";
 import SidebarItem from "@/components/SidebarItem";
 import { useAudio } from "@/hooks/useAudio";
+import { useMemo } from "react";
 
 const options = linkOptions([
   {
     to: "/dashboard/status",
-    label: "Status",
+    label: m.status(),
     icon: <RadioIcon aria-hidden="true" className="mr-2 w-6 h-6" />,
     activeOptions: {
       exact: false,
@@ -24,7 +25,7 @@ const options = linkOptions([
   },
   {
     to: "/dashboard/guides",
-    label: "Guias em vídeo",
+    label: m.video_guide(),
     icon: <PlayIcon aria-hidden="true" className="mr-2 w-6 h-6" />,
     activeOptions: {
       exact: false,
@@ -32,7 +33,7 @@ const options = linkOptions([
   },
   {
     to: "/dashboard/adjusts",
-    label: "Ajustes",
+    label: m.settings(),
     icon: <SettingsIcon aria-hidden="true" className="mr-2 w-6 h-6" />,
     activeOptions: {
       exact: false,
@@ -48,10 +49,15 @@ function RouteComponent() {
   const playSwitchTabs = useAudio("switch_tabs");
   const location = useLocation();
 
+  const currentOption = useMemo(
+    () => options.find((option) => location.pathname.startsWith(option.to)),
+    [location.pathname],
+  );
+
   return (
     <div className="flex h-dvh relative isolate bg-background">
       {/* Desktop Menu */}
-      <nav className="hidden md:flex flex-col h-full w-full max-w-xs lg:max-w-sm border-r bg-background pt-8 px-12">
+      <nav className="hidden md:flex flex-col h-full w-full max-w-xs xl:max-w-sm border-r bg-background pt-8 px-12">
         <h2 className="text-2xl font-semibold tracking-tight">
           {m.bia_radar()}
         </h2>
@@ -90,9 +96,18 @@ function RouteComponent() {
         </div>
       </nav>
 
-      <main className="relative w-full h-full overflow-y-auto overflow-x-hidden">
-        <div className="relative z-1 p-6 md:p-10 max-w-2xl mx-auto pb-32 md:pb-0">
-          <FixedTogglers />
+      <main className="relative w-full min-h-dvh flex justify-center">
+        <div className="z-1 px-6 pt-6 w-full max-w-4xl">
+          <header className="mb-8 flex items-center justify-between">
+            <div className="space-y-2">
+              <h1 className="text-3xl font-semibold">{currentOption?.label}</h1>
+              <p> Configsdkfjksdfjskldfjklsdfjkj </p>
+            </div>
+            <div>
+              <HeaderButtons />
+            </div>
+          </header>
+
           <Outlet />
         </div>
         <AmbientBackground />

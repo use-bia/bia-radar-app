@@ -15,7 +15,7 @@ import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
 import { Route as ConnectionIndexRouteImport } from './routes/connection/index'
 import { Route as DashboardStatusIndexRouteImport } from './routes/dashboard/status/index'
 import { Route as DashboardGuidesIndexRouteImport } from './routes/dashboard/guides/index'
-import { Route as DashboardAdjustIndexRouteImport } from './routes/dashboard/adjust/index'
+import { Route as DashboardAdjustsIndexRouteImport } from './routes/dashboard/adjusts/index'
 
 const DashboardRouteRoute = DashboardRouteRouteImport.update({
   id: '/dashboard',
@@ -47,9 +47,9 @@ const DashboardGuidesIndexRoute = DashboardGuidesIndexRouteImport.update({
   path: '/guides/',
   getParentRoute: () => DashboardRouteRoute,
 } as any)
-const DashboardAdjustIndexRoute = DashboardAdjustIndexRouteImport.update({
-  id: '/adjust/',
-  path: '/adjust/',
+const DashboardAdjustsIndexRoute = DashboardAdjustsIndexRouteImport.update({
+  id: '/adjusts/',
+  path: '/adjusts/',
   getParentRoute: () => DashboardRouteRoute,
 } as any)
 
@@ -58,7 +58,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof DashboardRouteRouteWithChildren
   '/connection/': typeof ConnectionIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
-  '/dashboard/adjust/': typeof DashboardAdjustIndexRoute
+  '/dashboard/adjusts/': typeof DashboardAdjustsIndexRoute
   '/dashboard/guides/': typeof DashboardGuidesIndexRoute
   '/dashboard/status/': typeof DashboardStatusIndexRoute
 }
@@ -66,7 +66,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/connection': typeof ConnectionIndexRoute
   '/dashboard': typeof DashboardIndexRoute
-  '/dashboard/adjust': typeof DashboardAdjustIndexRoute
+  '/dashboard/adjusts': typeof DashboardAdjustsIndexRoute
   '/dashboard/guides': typeof DashboardGuidesIndexRoute
   '/dashboard/status': typeof DashboardStatusIndexRoute
 }
@@ -76,7 +76,7 @@ export interface FileRoutesById {
   '/dashboard': typeof DashboardRouteRouteWithChildren
   '/connection/': typeof ConnectionIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
-  '/dashboard/adjust/': typeof DashboardAdjustIndexRoute
+  '/dashboard/adjusts/': typeof DashboardAdjustsIndexRoute
   '/dashboard/guides/': typeof DashboardGuidesIndexRoute
   '/dashboard/status/': typeof DashboardStatusIndexRoute
 }
@@ -87,7 +87,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/connection/'
     | '/dashboard/'
-    | '/dashboard/adjust/'
+    | '/dashboard/adjusts/'
     | '/dashboard/guides/'
     | '/dashboard/status/'
   fileRoutesByTo: FileRoutesByTo
@@ -95,7 +95,7 @@ export interface FileRouteTypes {
     | '/'
     | '/connection'
     | '/dashboard'
-    | '/dashboard/adjust'
+    | '/dashboard/adjusts'
     | '/dashboard/guides'
     | '/dashboard/status'
   id:
@@ -104,7 +104,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/connection/'
     | '/dashboard/'
-    | '/dashboard/adjust/'
+    | '/dashboard/adjusts/'
     | '/dashboard/guides/'
     | '/dashboard/status/'
   fileRoutesById: FileRoutesById
@@ -159,11 +159,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardGuidesIndexRouteImport
       parentRoute: typeof DashboardRouteRoute
     }
-    '/dashboard/adjust/': {
-      id: '/dashboard/adjust/'
-      path: '/adjust'
-      fullPath: '/dashboard/adjust/'
-      preLoaderRoute: typeof DashboardAdjustIndexRouteImport
+    '/dashboard/adjusts/': {
+      id: '/dashboard/adjusts/'
+      path: '/adjusts'
+      fullPath: '/dashboard/adjusts/'
+      preLoaderRoute: typeof DashboardAdjustsIndexRouteImport
       parentRoute: typeof DashboardRouteRoute
     }
   }
@@ -171,14 +171,14 @@ declare module '@tanstack/react-router' {
 
 interface DashboardRouteRouteChildren {
   DashboardIndexRoute: typeof DashboardIndexRoute
-  DashboardAdjustIndexRoute: typeof DashboardAdjustIndexRoute
+  DashboardAdjustsIndexRoute: typeof DashboardAdjustsIndexRoute
   DashboardGuidesIndexRoute: typeof DashboardGuidesIndexRoute
   DashboardStatusIndexRoute: typeof DashboardStatusIndexRoute
 }
 
 const DashboardRouteRouteChildren: DashboardRouteRouteChildren = {
   DashboardIndexRoute: DashboardIndexRoute,
-  DashboardAdjustIndexRoute: DashboardAdjustIndexRoute,
+  DashboardAdjustsIndexRoute: DashboardAdjustsIndexRoute,
   DashboardGuidesIndexRoute: DashboardGuidesIndexRoute,
   DashboardStatusIndexRoute: DashboardStatusIndexRoute,
 }

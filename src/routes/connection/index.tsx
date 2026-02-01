@@ -1,4 +1,4 @@
-import FixedTogglers from "@/components/FixedTogglers";
+import HeaderButtons from "@/components/HeaderButtons";
 import { m } from "@/paraglide/messages.js";
 import { Button } from "@heroui/react";
 import { createFileRoute } from "@tanstack/react-router";
@@ -13,7 +13,7 @@ function RouteComponent() {
   return (
     <div className="w-full min-h-dvh flex flex-col items-center p-4">
       <div className="w-full flex justify-end mb-4">
-        <FixedTogglers />
+        <HeaderButtons />
       </div>
 
       <div className="flex-1 flex flex-col items-center justify-center w-full">

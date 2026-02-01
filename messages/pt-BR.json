@@ -13,5 +13,10 @@
   "synchronizing_hardware": "Sincronizando Hardware",
   "bia_radar": "BIA RADAR",
   "loading": "Carregando",
-  "dashboard": "Painel de Controle"
+  "dashboard": "Painel de Controle",
+  "status": "Status",
+  "video_guide": "Guias em vídeo",
+  "settings": "Ajustes",
+  "download_app": "Baixar App",
+  "sounds": "Sons"
 }

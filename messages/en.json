@@ -13,5 +13,10 @@
   "synchronizing_hardware": "Synchronizing Hardware",
   "bia_radar": "BIA RADAR",
   "loading": "Loading",
-  "dashboard": "Dashboard"
+  "dashboard": "Dashboard",
+  "status": "Status",
+  "video_guide": "Video Guide",
+  "settings": "Settings",
+  "download_app": "Download App",
+  "sounds": "Sounds"
 }
