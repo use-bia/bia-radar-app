@@ -16,37 +16,39 @@ const FixedTogglers: FunctionComponent<FixedTogglersProps> = () => {
   return (
     <div className="absolute top-0 right-0 p-6 gap-2 flex z-50">
       <Tooltip>
-        <Tooltip.Trigger>
-          <Button
-            variant="tertiary"
-            onClick={() => {
-              toggle();
-              playToggle();
-            }}
-            aria-label={m.toggle_theme()}
-          >
-            {theme === "light" ? <SunIcon /> : <MoonIcon />}
-          </Button>
-        </Tooltip.Trigger>
+        <Button
+          variant="tertiary"
+          onClick={() => {
+            toggle();
+            playToggle();
+          }}
+          aria-label={m.toggle_theme_to({
+            theme: theme === "light" ? m.dark_mode() : m.light_mode(),
+          })}
+          aria-pressed={theme === "dark"}
+        >
+          {theme === "light" ? <SunIcon /> : <MoonIcon />}
+        </Button>
         <Tooltip.Content>
           <Tooltip.Arrow />
-          {m.toggle_theme()}
+          {m.toggle_theme_to({
+            theme: theme === "light" ? m.dark_mode() : m.light_mode(),
+          })}
         </Tooltip.Content>
       </Tooltip>
       <Tooltip>
-        <Tooltip.Trigger>
-          <Button
-            variant="tertiary"
-            onClick={() => {
-              toggleAudio();
-            }}
-            aria-label={m.en_dis_sounds({
-              status: enabledAudio ? m.disable() : m.enable(),
-            })}
-          >
-            {enabledAudio ? <Volume2Icon /> : <VolumeOffIcon />}
-          </Button>
-        </Tooltip.Trigger>
+        <Button
+          variant="tertiary"
+          onClick={() => {
+            toggleAudio();
+          }}
+          aria-label={m.en_dis_sounds({
+            status: enabledAudio ? m.disable() : m.enable(),
+          })}
+          aria-pressed={enabledAudio}
+        >
+          {enabledAudio ? <Volume2Icon /> : <VolumeOffIcon />}
+        </Button>
         <Tooltip.Content>
           <Tooltip.Arrow />
           {m.en_dis_sounds({

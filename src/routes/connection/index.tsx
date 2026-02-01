@@ -29,22 +29,22 @@ function RouteComponent() {
         <h2 className="text-3xl font-light tracking-widest text-center uppercase">
           {m.bia_radar()}
         </h2>
-        <p className="text-stone-600 text-[10px] font-bold uppercase tracking-[0.6em] mt-4 text-center">
+        <p className="text-muted text-[10px] font-bold uppercase tracking-[0.6em] mt-4 text-center">
           {m.synchronizing_hardware()}
         </p>
       </div>
 
-      <div className="w-full max-w-md pb-8 px-3 flex flex-col space-y-4">
+      <div className="w-full max-w-sm pb-8 px-3 flex flex-col space-y-4">
         <Button
           variant="primary"
-          className="w-full text-xl font-bold h-14 capitalize"
+          className="w-full font-bold h-14 capitalize"
           size="lg"
         >
           {m.connect_via_bluetooth()}
         </Button>
         <Button
           variant="secondary"
-          className="w-full text-xl font-bold h-14 capitalize"
+          className="w-full font-bold h-14 capitalize"
           size="lg"
         >
           {m.connect_via_usb()}
