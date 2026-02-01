@@ -1,15 +1,17 @@
 import HeaderButtons from "@/components/HeaderButtons";
 import { m } from "@/paraglide/messages.js";
-import { Button } from "@heroui/react";
-import { createFileRoute } from "@tanstack/react-router";
+import { Button, Spinner } from "@heroui/react";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { RadioIcon } from "lucide-react";
 
-export const Route = createFileRoute("/connection/")({
+export const Route = createFileRoute("/connect/")({
   component: RouteComponent,
+  loader: () => <Spinner size="md" />,
 });
 
 function RouteComponent() {
+  const navigate = useNavigate();
   return (
     <div className="w-full min-h-dvh flex flex-col items-center p-4">
       <div className="w-full flex justify-end mb-4">
@@ -44,6 +46,7 @@ function RouteComponent() {
           variant="primary"
           className="w-full font-bold h-14 capitalize"
           size="lg"
+          onClick={() => navigate({ to: "/dashboard" })}
         >
           {m.connect_via_bluetooth()}
         </Button>
@@ -51,6 +54,7 @@ function RouteComponent() {
           variant="secondary"
           className="w-full font-bold h-14 capitalize"
           size="lg"
+          onClick={() => navigate({ to: "/dashboard" })}
         >
           {m.connect_via_usb()}
         </Button>

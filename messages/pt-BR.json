@@ -22,5 +22,6 @@
   "sounds": "Sons",
   "connected": "Conectado",
   "disconnected": "Desconectado",
-  "device_connected_last_seen": "Dispositivo conectado (Visto pela última vez há {time} ms)"
+  "device_connected_last_seen": "Dispositivo conectado (Visto pela última vez há {time} ms)",
+  "disconnect": "Desconectar"
 }

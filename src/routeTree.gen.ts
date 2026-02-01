@@ -12,7 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as DashboardRouteRouteImport } from './routes/dashboard/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
-import { Route as ConnectionIndexRouteImport } from './routes/connection/index'
+import { Route as ConnectIndexRouteImport } from './routes/connect/index'
 import { Route as DashboardStatusIndexRouteImport } from './routes/dashboard/status/index'
 import { Route as DashboardGuidesIndexRouteImport } from './routes/dashboard/guides/index'
 import { Route as DashboardAdjustsIndexRouteImport } from './routes/dashboard/adjusts/index'
@@ -32,9 +32,9 @@ const DashboardIndexRoute = DashboardIndexRouteImport.update({
   path: '/',
   getParentRoute: () => DashboardRouteRoute,
 } as any)
-const ConnectionIndexRoute = ConnectionIndexRouteImport.update({
-  id: '/connection/',
-  path: '/connection/',
+const ConnectIndexRoute = ConnectIndexRouteImport.update({
+  id: '/connect/',
+  path: '/connect/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DashboardStatusIndexRoute = DashboardStatusIndexRouteImport.update({
@@ -56,7 +56,7 @@ const DashboardAdjustsIndexRoute = DashboardAdjustsIndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRouteRouteWithChildren
-  '/connection/': typeof ConnectionIndexRoute
+  '/connect/': typeof ConnectIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/dashboard/adjusts/': typeof DashboardAdjustsIndexRoute
   '/dashboard/guides/': typeof DashboardGuidesIndexRoute
@@ -64,7 +64,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/connection': typeof ConnectionIndexRoute
+  '/connect': typeof ConnectIndexRoute
   '/dashboard': typeof DashboardIndexRoute
   '/dashboard/adjusts': typeof DashboardAdjustsIndexRoute
   '/dashboard/guides': typeof DashboardGuidesIndexRoute
@@ -74,7 +74,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRouteRouteWithChildren
-  '/connection/': typeof ConnectionIndexRoute
+  '/connect/': typeof ConnectIndexRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/dashboard/adjusts/': typeof DashboardAdjustsIndexRoute
   '/dashboard/guides/': typeof DashboardGuidesIndexRoute
@@ -85,7 +85,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/dashboard'
-    | '/connection/'
+    | '/connect/'
     | '/dashboard/'
     | '/dashboard/adjusts/'
     | '/dashboard/guides/'
@@ -93,7 +93,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/connection'
+    | '/connect'
     | '/dashboard'
     | '/dashboard/adjusts'
     | '/dashboard/guides'
@@ -102,7 +102,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/dashboard'
-    | '/connection/'
+    | '/connect/'
     | '/dashboard/'
     | '/dashboard/adjusts/'
     | '/dashboard/guides/'
@@ -112,7 +112,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DashboardRouteRoute: typeof DashboardRouteRouteWithChildren
-  ConnectionIndexRoute: typeof ConnectionIndexRoute
+  ConnectIndexRoute: typeof ConnectIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -138,11 +138,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardIndexRouteImport
       parentRoute: typeof DashboardRouteRoute
     }
-    '/connection/': {
-      id: '/connection/'
-      path: '/connection'
-      fullPath: '/connection/'
-      preLoaderRoute: typeof ConnectionIndexRouteImport
+    '/connect/': {
+      id: '/connect/'
+      path: '/connect'
+      fullPath: '/connect/'
+      preLoaderRoute: typeof ConnectIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dashboard/status/': {
@@ -190,7 +190,7 @@ const DashboardRouteRouteWithChildren = DashboardRouteRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DashboardRouteRoute: DashboardRouteRouteWithChildren,
-  ConnectionIndexRoute: ConnectionIndexRoute,
+  ConnectIndexRoute: ConnectIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
