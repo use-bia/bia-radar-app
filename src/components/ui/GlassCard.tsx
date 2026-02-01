@@ -17,7 +17,7 @@ export const GlassCard: FunctionComponent<GlassCardProps> = ({
     <Card
       {...props}
       className={cn(
-        "bg-stone-900/40 backdrop-blur-2xl border shadow-2xl",
+        "bg-surface/30 backdrop-blur-2xl border shadow-lg",
         "rounded-[2.5rem]",
         className,
       )}
