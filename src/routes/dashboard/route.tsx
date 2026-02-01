@@ -63,7 +63,7 @@ function RouteComponent() {
   return (
     <div className="flex min-h-dvh h-full relative isolate bg-background">
       {/* Desktop Menu */}
-      <nav className="hidden md:flex flex-col sticky top-0 h-screen w-full max-w-xs xl:max-w-sm border-r bg-background pt-8 px-12">
+      <nav className="hidden md:flex flex-col sticky top-0 h-screen w-full max-w-2xs lg:max-w-xs xl:max-w-sm border-r bg-background pt-8 px-8 lg:px-12">
         <h2 className="text-3xl font-semibold tracking-tight">
           {m.bia_radar()}
         </h2>
