@@ -11,5 +11,7 @@
   "connect_via_bluetooth": "Connect via Bluetooth®",
   "connect_via_usb": "Connect via USB",
   "synchronizing_hardware": "Synchronizing Hardware",
-  "bia_radar": "BIA RADAR"
+  "bia_radar": "BIA RADAR",
+  "loading": "Loading",
+  "dashboard": "Dashboard"
 }
