@@ -1,16 +1,53 @@
-import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
+import {
+  createFileRoute,
+  Link,
+  linkOptions,
+  Outlet,
+  useLocation,
+} from "@tanstack/react-router";
 import { AmbientBackground } from "@/components/AmbientBackground";
 import FixedTogglers from "@/components/FixedTogglers";
 import { m } from "@/paraglide/messages";
 import { PlayIcon, RadioIcon, SettingsIcon } from "lucide-react";
 import { Button } from "@heroui/react";
 import SidebarItem from "@/components/SidebarItem";
+import { useAudio } from "@/hooks/useAudio";
+
+const options = linkOptions([
+  {
+    to: "/dashboard/status",
+    label: "Status",
+    icon: <RadioIcon aria-hidden="true" className="mr-2 w-6 h-6" />,
+    activeOptions: {
+      exact: false,
+    },
+  },
+  {
+    to: "/dashboard/guides",
+    label: "Guias em vídeo",
+    icon: <PlayIcon aria-hidden="true" className="mr-2 w-6 h-6" />,
+    activeOptions: {
+      exact: false,
+    },
+  },
+  {
+    to: "/dashboard/adjusts",
+    label: "Ajustes",
+    icon: <SettingsIcon aria-hidden="true" className="mr-2 w-6 h-6" />,
+    activeOptions: {
+      exact: false,
+    },
+  },
+]);
 
 export const Route = createFileRoute("/dashboard")({
   component: RouteComponent,
 });
 
 function RouteComponent() {
+  const playSwitchTabs = useAudio("switch_tabs");
+  const location = useLocation();
+
   return (
     <div className="flex h-dvh relative isolate bg-background">
       {/* Desktop Menu */}
@@ -20,43 +57,24 @@ function RouteComponent() {
         </h2>
 
         <div className="mt-10 flex flex-col w-full gap-2">
-          {/* STATUS */}
-          <Link to="/dashboard/status" preload="intent">
-            {({ isActive }) => (
-              <SidebarItem isActive={isActive}>
-                <RadioIcon className="mr-2 w-6 h-6" />
-                Status
-              </SidebarItem>
-            )}
-          </Link>
-
-          {/* GUIDES */}
-          <Link
-            to="/dashboard/guides"
-            preload="intent"
-            className="w-full group focus-visible:outline-none"
-          >
-            {({ isActive }) => (
-              <SidebarItem isActive={isActive}>
-                <PlayIcon className="mr-2 w-6 h-6" />
-                Guias em vídeo
-              </SidebarItem>
-            )}
-          </Link>
-
-          {/* ADJUSTS */}
-          <Link
-            to="/dashboard/adjusts"
-            preload="intent"
-            className="w-full group focus-visible:outline-none"
-          >
-            {({ isActive }) => (
-              <SidebarItem isActive={isActive}>
-                <SettingsIcon className="mr-2 w-6 h-6" />
-                Ajustes
-              </SidebarItem>
-            )}
-          </Link>
+          {options.map(({ to, label, icon }, index) => (
+            <Link
+              key={index}
+              to={to}
+              preload="intent"
+              onClick={() => {
+                const isActive = location.pathname.startsWith(to);
+                if (!isActive) playSwitchTabs();
+              }}
+            >
+              {({ isActive }) => (
+                <SidebarItem isActive={isActive}>
+                  {icon}
+                  {label}
+                </SidebarItem>
+              )}
+            </Link>
+          ))}
         </div>
       </nav>
 
