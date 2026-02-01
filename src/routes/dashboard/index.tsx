@@ -10,7 +10,7 @@ export const Route = createFileRoute("/dashboard/")({
 function DashboardIndex() {
   return (
     <div>
-      <GlassCard className="">asdf</GlassCard>
+      <GlassCard>asdf</GlassCard>
       <Card className="mt-6 p-6">
         <Card.Title>Welcome to your dashboard</Card.Title>
         <Card.Content>
