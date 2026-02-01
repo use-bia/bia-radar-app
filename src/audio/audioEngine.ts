@@ -10,7 +10,14 @@ class AudioEngine {
     if (this.initialized) return;
 
     (Object.keys(SOUND_MAP) as SoundName[]).forEach((name) => {
-      const audio = new Audio(SOUND_MAP[name]);
+      const rawPath = SOUND_MAP[name];
+
+      const relativePath = rawPath.startsWith('/') ? rawPath.slice(1) : rawPath;
+
+      // Prepend the Vite Base URL
+      const fullPath = `${import.meta.env.BASE_URL}${relativePath}`;
+
+      const audio = new Audio(fullPath);
       audio.preload = "auto";
       audio.volume = this.volume;
       this.sounds.set(name, audio);

@@ -1,8 +1,8 @@
 export const SOUND_MAP = {
-  toggle_theme: "/sounds/switch26.ogg",
-  toggle_sound: "/sounds/switch26.ogg",
-  switch_tabs: "/sounds/drop_003.ogg",
-  download_app: "/sounds/confirmation_002.ogg",
+  toggle_theme: "/sounds/switch26.m4a",
+  toggle_sound: "/sounds/switch26.m4a",
+  switch_tabs: "/sounds/drop_003.m4a",
+  download_app: "/sounds/confirmation_002.m4a",
 } as const;
 
 export type SoundName = keyof typeof SOUND_MAP;
