@@ -57,24 +57,27 @@ function RouteComponent() {
         </h2>
 
         <div className="mt-10 flex flex-col w-full gap-2">
-          {options.map(({ to, label, icon }, index) => (
-            <Link
-              key={index}
-              to={to}
-              preload="intent"
-              onClick={() => {
-                const isActive = location.pathname.startsWith(to);
-                if (!isActive) playSwitchTabs();
-              }}
-            >
-              {({ isActive }) => (
-                <SidebarItem isActive={isActive}>
-                  {icon}
-                  {label}
-                </SidebarItem>
-              )}
-            </Link>
-          ))}
+          {options.map(({ to, label, icon }, index) => {
+            const isActive = location.pathname.startsWith(to);
+            return (
+              <Link
+                key={index}
+                to={to}
+                preload="intent"
+                onClick={() => {
+                  if (!isActive) playSwitchTabs();
+                }}
+                aria-current={isActive ? "page" : undefined}
+              >
+                {({ isActive }) => (
+                  <SidebarItem isActive={isActive}>
+                    {icon}
+                    {label}
+                  </SidebarItem>
+                )}
+              </Link>
+            );
+          })}
         </div>
       </nav>
 
