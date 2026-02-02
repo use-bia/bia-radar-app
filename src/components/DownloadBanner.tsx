@@ -1,6 +1,6 @@
 import { useAudio } from "@/hooks/useAudio";
 import { m } from "@/paraglide/messages";
-import { Button, cn } from "@heroui/react";
+import { AlertDialog, Button, cn, Tooltip } from "@heroui/react";
 import { DownloadIcon, XIcon } from "lucide-react";
 import type { FunctionComponent } from "react";
 
@@ -12,6 +12,8 @@ const DownloadBanner: FunctionComponent<DownloadBannerProps> = ({
   className,
 }) => {
   const playDownload = useAudio("download_app");
+  const playOpenDialog = useAudio("open_dialog");
+  const playCloseDialog = useAudio("close_dialog");
 
   return (
     <aside
@@ -44,14 +46,63 @@ const DownloadBanner: FunctionComponent<DownloadBannerProps> = ({
       </div>
 
       <div className="flex-1 flex justify-end">
-        <Button
-          variant="ghost"
-          isIconOnly
-          aria-label="Close notification"
-          className="text-foreground"
+        <AlertDialog
+          onOpenChange={(isOpen) => {
+            if (isOpen) {
+              playOpenDialog();
+            } else {
+              playCloseDialog();
+            }
+          }}
         >
-          <XIcon />
-        </Button>
+          <Tooltip>
+            <Button
+              variant="ghost"
+              isIconOnly
+              aria-label={m.ignore_download()}
+              className="text-foreground"
+            >
+              <XIcon />
+            </Button>
+
+            <Tooltip.Content showArrow>
+              <Tooltip.Arrow />
+              {m.ignore_download()}
+            </Tooltip.Content>
+          </Tooltip>
+          <AlertDialog.Backdrop isDismissable isKeyboardDismissDisabled>
+            <AlertDialog.Container placement="center">
+              <AlertDialog.Dialog className="sm:max-w-100 border">
+                <AlertDialog.CloseTrigger />
+                <AlertDialog.Header>
+                  <AlertDialog.Icon status="danger" />
+                  <AlertDialog.Heading className="font-semibold">
+                    {m.ignore_download()}
+                  </AlertDialog.Heading>
+                </AlertDialog.Header>
+                <AlertDialog.Body>
+                  <br />
+
+                  <p className="text-center">
+                    <b>{m.dismiss_download_message_1()}</b>
+                  </p>
+                  <br />
+                  <p className="text-justify">
+                    {m.dismiss_download_message_2()}
+                  </p>
+                </AlertDialog.Body>
+                <AlertDialog.Footer>
+                  <Button slot="close" variant="tertiary">
+                    {m.cancel()}
+                  </Button>
+                  <Button slot="close" variant="danger">
+                    {m.ignore_download()}
+                  </Button>
+                </AlertDialog.Footer>
+              </AlertDialog.Dialog>
+            </AlertDialog.Container>
+          </AlertDialog.Backdrop>
+        </AlertDialog>
       </div>
     </aside>
   );

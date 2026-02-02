@@ -26,5 +26,9 @@
   "disconnect": "Desconectar",
   "you_are_eligible_to_download_the_app": "Você está elegível para baixar o aplicativo BIA-RADAR!",
   "for_a_better_experience": "Para uma melhor experiência",
-  "click_here_to_download": "clique aqui para baixar."
+  "click_here_to_download": "clique aqui para baixar.",
+  "cancel": "Cancelar",
+  "ignore_download": "Ignorar download",
+  "dismiss_download_message_1": "Para ter a melhor experiência nós recomendamos baixar o aplicativo BIA-RADAR.",
+  "dismiss_download_message_2": "Você pode fechar essa mensagem e continuar usando a aplicação web, mas algumas funcionalidades podem estar limitadas. Mas não se preocupe, você pode baixar o aplicativo a qualquer momento clicando no botão 'Baixar App' no menu."
 }
