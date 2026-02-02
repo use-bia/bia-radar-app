@@ -1,6 +1,10 @@
 import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
-import { RouterProvider, createRouter } from "@tanstack/react-router";
+import {
+  RouterProvider,
+  createHashHistory,
+  createRouter,
+} from "@tanstack/react-router";
 import { getLocale, setLocale } from "@/paraglide/runtime.js";
 
 // Import the generated route tree
@@ -19,6 +23,8 @@ const theme = storedTheme ?? getSystemTheme();
 applyTheme(theme);
 audioEngine.init();
 
+const hashHistory = createHashHistory();
+
 // Create a new router instance
 const router = createRouter({
   routeTree,
@@ -27,6 +33,7 @@ const router = createRouter({
   scrollRestoration: true,
   defaultStructuralSharing: true,
   defaultPreloadStaleTime: 0,
+  history: hashHistory,
 });
 
 // Register the router instance for type safety

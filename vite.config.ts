@@ -7,6 +7,7 @@ import tailwindcss from "@tailwindcss/vite";
 
 import { tanstackRouter } from "@tanstack/router-plugin/vite";
 import { fileURLToPath, URL } from "node:url";
+import { viteStaticCopy } from "vite-plugin-static-copy";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -24,6 +25,14 @@ export default defineConfig({
     }),
     viteReact(),
     tailwindcss(),
+    viteStaticCopy({
+      targets: [
+        {
+          src: "CNAME",
+          dest: "./",
+        },
+      ],
+    }),
   ],
 
   resolve: {
