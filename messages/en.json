@@ -23,5 +23,8 @@
   "connected": "Connected",
   "disconnected": "Disconnected",
   "device_connected_last_seen": "Device connected (last seen: {time} ms)",
-  "disconnect": "Disconnect"
+  "disconnect": "Disconnect",
+  "you_are_eligible_to_download_the_app": "You are eligible to download the BIA-RADAR app!",
+  "for_a_better_experience": "For a better experience",
+  "click_here_to_download": "click here to download."
 }

@@ -18,7 +18,6 @@ interface HeaderButtonsProps {}
 const HeaderButtons: FunctionComponent<HeaderButtonsProps> = () => {
   const { theme, toggle } = useTheme();
   const playToggle = useAudio("toggle_theme");
-  const playDownload = useAudio("download_app");
   const { enabled: enabledAudio, toggle: toggleAudio } = useAudioSettings();
   const isDownloadAvailable = true;
 
@@ -46,27 +45,6 @@ const HeaderButtons: FunctionComponent<HeaderButtonsProps> = () => {
 
   return (
     <div className="flex gap-2">
-      <Tooltip>
-        <Button
-          variant="primary"
-          // We don't set 'size' or 'isIconOnly' props here;
-          // we control them via className for full responsiveness.
-          className={responsiveBtnClass}
-          onClick={() => {
-            playDownload();
-          }}
-          aria-label={m.download_app()}
-          isDisabled={!isDownloadAvailable}
-        >
-          <DownloadIcon size={20} />
-          <span className={responsiveTextClass}>{m.download_app()}</span>
-        </Button>
-        <Tooltip.Content>
-          <Tooltip.Arrow />
-          {m.download_app()}
-        </Tooltip.Content>
-      </Tooltip>
-
       <Tooltip>
         <Button
           variant="tertiary"

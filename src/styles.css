@@ -38,9 +38,10 @@
   --success-foreground: oklch(21.03% 0.0059 139.78);
   --surface: oklch(100% 0 161.95);
   --surface-foreground: oklch(21.03% 0.0059 161.95);
-  --surface-overlay: #f5f5f4;
   --warning: oklch(78.19% 0.1585 61.3);
   --warning-foreground: oklch(21.03% 0.0059 61.3);
+  --accent-button: oklch(94% 0 161.95);
+  --accent-button-foreground: oklch(21.03% 0.0059 161.95);
 
   /* Border Radius */
   --radius: 0.25rem;
@@ -81,9 +82,10 @@
   --success-foreground: oklch(21.03% 0.0059 139.78);
   --surface: #1c1917;
   --surface-foreground: oklch(99.11% 0 0);
-  --surface-overlay: #282523;
   --warning: oklch(82.03% 0.1388 65.31);
   --warning-foreground: oklch(21.03% 0.0059 65.31);
+  --accent-button: #00855d;
+  --accent-button-foreground: oklch(100% 0.00011 271.152);
 }
 
 [data-theme="high-contrast"] {
@@ -99,7 +101,6 @@
   --field-placeholder: #ffffff;
   --surface: #000000;
   --surface-foreground: #ffffff;
-  --surface-overlay: #000000;
   --overlay: #000000;
   --overlay-foreground: #ffffff;
   --danger: #ffff00;
@@ -115,10 +116,13 @@
   --radius: 0px;
   --field-radius: 0px;
   --glass-radius: 0px;
+  --accent-button: #ffffff;
+  --accent-button-foreground: #000000;
 }
 
 @theme inline {
-  --color-surface-overlay: var(--surface-overlay);
+  --color-accent-button: var(--accent-button);
+  --color-accent-button-foreground: var(--accent-button-foreground);
 }
 
 @custom-variant high-contrast (&:where([data-theme="high-contrast"] *));

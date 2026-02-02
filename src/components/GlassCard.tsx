@@ -1,6 +1,6 @@
 // src/components/ui/GlassCard.tsx
 import type { FunctionComponent, ReactNode } from "react";
-import { Card, type CardProps } from "@heroui/react";
+import { Card, Surface, type CardProps } from "@heroui/react";
 import { cn } from "@heroui/react";
 
 interface GlassCardProps extends CardProps {
@@ -14,15 +14,15 @@ export const GlassCard: FunctionComponent<GlassCardProps> = ({
   ...props
 }) => {
   return (
-    <Card
+    <Surface
       {...props}
+      variant="default"
       className={cn(
-        "bg-surface/70 border shadow-lg",
-        "rounded-(--glass-radius)",
+        "bg-surface/70 border shadow-lg p-6 rounded-(--glass-radius)",
         className,
       )}
     >
-      <Card.Content className="p-6 overflow-visible">{children}</Card.Content>
-    </Card>
+      {children}
+    </Surface>
   );
 };

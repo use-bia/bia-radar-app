@@ -13,12 +13,14 @@ import {
   MonitorPlayIcon,
   RadioIcon,
   SettingsIcon,
+  XIcon,
 } from "lucide-react";
-import { Tooltip } from "@heroui/react";
+import { Button, CloseButton, Tooltip } from "@heroui/react";
 import SidebarItem from "@/components/SidebarItem";
 import { useAudio } from "@/hooks/useAudio";
 import { useMemo } from "react";
 import FloatingNavBarItem from "@/components/FloatingNavBarItem";
+import DownloadBanner from "@/components/DownloadBanner";
 
 const options = linkOptions([
   {
@@ -54,6 +56,7 @@ export const Route = createFileRoute("/dashboard")({
 function RouteComponent() {
   const playSwitchTabs = useAudio("switch_tabs");
   const location = useLocation();
+  const isDownloadAvailable = true; // TODO: Replace with real logic
 
   const currentOption = useMemo(
     () => options.find((option) => location.pathname.startsWith(option.to)),
@@ -109,8 +112,11 @@ function RouteComponent() {
         </div>
       </nav>
 
-      <main className="relative w-full min-h-dvh flex justify-center">
-        <div className="z-1 px-8 sm:px-12 md:px-6 pt-10 w-full max-w-5xl">
+      <main className="relative w-full min-h-dvh flex flex-col justify-center">
+        {/* 1. The Banner (Notification Layer) */}
+        {isDownloadAvailable && <DownloadBanner className="z-1" />}
+
+        <div className="z-1 px-8 sm:px-12 md:px-6 pt-8 w-full h-full max-w-5xl mx-auto">
           <header className="mb-8 flex items-center justify-between">
             <div className="space-y-2">
               <h1 className="text-3xl font-semibold">{currentOption?.label}</h1>
@@ -123,7 +129,7 @@ function RouteComponent() {
 
           <Outlet />
           {/* Footer acts like a padding at the bottom to ensure no content is not hidden behind the fixed bottom nav */}
-          <footer className="h-36 md:h-10" />
+          <div className="h-36 md:h-10" aria-hidden="true" />
         </div>
         <AmbientBackground />
       </main>

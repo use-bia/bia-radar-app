@@ -23,10 +23,6 @@ const theme = storedTheme ?? getSystemTheme();
 applyTheme(theme);
 audioEngine.init();
 
-const memoryHistory = createMemoryHistory({
-  initialEntries: ["/"],
-});
-
 // Create a new router instance
 const router = createRouter({
   routeTree,
@@ -35,7 +31,6 @@ const router = createRouter({
   scrollRestoration: true,
   defaultStructuralSharing: true,
   defaultPreloadStaleTime: 0,
-  history: memoryHistory,
 });
 
 // Register the router instance for type safety
