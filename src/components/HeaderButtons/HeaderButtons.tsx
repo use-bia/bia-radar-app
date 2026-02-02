@@ -1,17 +1,9 @@
 import type { FunctionComponent } from "react";
-import { useAudioSettings } from "@/contexts/AudioSettingsContext";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useAudio } from "@/hooks/useAudio";
 import { m } from "@/paraglide/messages";
 import { Button, Tooltip } from "@heroui/react";
-import {
-  MoonIcon,
-  SunIcon,
-  ContrastIcon,
-  Volume2Icon,
-  VolumeOffIcon,
-  MenuIcon,
-} from "lucide-react";
+import { MoonIcon, SunIcon, ContrastIcon, MenuIcon } from "lucide-react";
 import HeaderButtonMenu from "./HeaderButtonMenu";
 
 interface HeaderButtonsProps {}
