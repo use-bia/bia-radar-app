@@ -6,7 +6,7 @@ import {
   useLocation,
 } from "@tanstack/react-router";
 import { AmbientBackground } from "@/components/AmbientBackground";
-import HeaderButtons from "@/components/HeaderButtons";
+import HeaderButtons from "@/components/HeaderButtons/HeaderButtons";
 import { m } from "@/paraglide/messages";
 import {
   CircleIcon,

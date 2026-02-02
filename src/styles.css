@@ -91,33 +91,67 @@
 [data-theme="high-contrast"] {
   color-scheme: dark;
 
+  /* 1. Define the dynamic main color (Defaults to White) */
+  --hc-main: #ffffff;
+
+  /* 2. Map system variables to the dynamic color */
   --background: #000000;
-  --foreground: #ffffff;
-  --border: #ffffff;
-  --accent: #ffffff;
+  --foreground: var(--hc-main);
+  --border: var(--hc-main);
+
+  --accent: var(--hc-main);
   --accent-foreground: #000000;
+
   --field-background: #000000;
-  --field-foreground: #ffffff;
-  --field-placeholder: #ffffff;
+  --field-foreground: var(--hc-main);
+  --field-placeholder: var(--hc-main);
+
   --surface: #000000;
-  --surface-foreground: #ffffff;
+  --surface-foreground: var(--hc-main);
+
   --overlay: #000000;
-  --overlay-foreground: #ffffff;
+  --overlay-foreground: var(--hc-main);
+
+  /* Semantic Colors: In High Contrast, these usually match the text 
+     or maintain specific distinct high-vis colors. 
+     You can map them to --hc-main for a "monochrome terminal" look 
+     or keep them distinct as you had before. */
   --danger: #ffff00;
   --danger-foreground: #000000;
   --success: #00ff00;
   --success-foreground: #000000;
   --warning: #00ffff;
   --warning-foreground: #000000;
-  --muted: #ffffff;
-  --focus: #ffff00;
+
+  --muted: var(--hc-main);
+  --focus: var(--hc-main); /* Changed to match main color for consistency */
+
   --default: #000000;
-  --default-foreground: #ffffff;
+  --default-foreground: var(--hc-main);
+
   --radius: 0px;
   --field-radius: 0px;
   --glass-radius: 0px;
-  --accent-button: #ffffff;
+
+  --accent-button: var(--hc-main);
   --accent-button-foreground: #000000;
+}
+
+/* 3. Color Overrides */
+
+/* Yellow Mode */
+[data-theme="high-contrast"][data-contrast-color="yellow"] {
+  --hc-main: #ffff00;
+}
+
+/* Green Mode */
+[data-theme="high-contrast"][data-contrast-color="green"] {
+  --hc-main: #00ff00; /* Standard Terminal Green */
+}
+
+/* Cyan Mode (Optional extra) */
+[data-theme="high-contrast"][data-contrast-color="cyan"] {
+  --hc-main: #00ffff;
 }
 
 @theme inline {

@@ -1,5 +1,5 @@
 import DownloadBanner from "@/components/DownloadBanner";
-import HeaderButtons from "@/components/HeaderButtons";
+import HeaderButtons from "@/components/HeaderButtons/HeaderButtons";
 import { useAudio } from "@/hooks/useAudio";
 import { m } from "@/paraglide/messages.js";
 import { Button, Spinner } from "@heroui/react";

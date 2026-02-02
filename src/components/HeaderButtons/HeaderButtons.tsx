@@ -10,7 +10,9 @@ import {
   ContrastIcon,
   Volume2Icon,
   VolumeOffIcon,
+  MenuIcon,
 } from "lucide-react";
+import HeaderButtonMenu from "./HeaderButtonMenu";
 
 interface HeaderButtonsProps {}
 
@@ -92,6 +94,24 @@ const HeaderButtons: FunctionComponent<HeaderButtonsProps> = () => {
           {m.en_dis_sounds({
             status: enabledAudio ? m.disable() : m.enable(),
           })}
+        </Tooltip.Content>
+      </Tooltip>
+
+      <Tooltip>
+        <HeaderButtonMenu>
+          <Button
+            variant="tertiary"
+            className={responsiveBtnClass}
+            onClick={() => {}}
+            aria-label="Open menu"
+          >
+            <MenuIcon size={20} />
+            <span className={responsiveTextClass}>Menu</span>
+          </Button>
+        </HeaderButtonMenu>
+        <Tooltip.Content>
+          <Tooltip.Arrow />
+          Abrir menu
         </Tooltip.Content>
       </Tooltip>
     </div>
