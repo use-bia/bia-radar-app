@@ -88,70 +88,85 @@
   --accent-button-foreground: oklch(100% 0.00011 271.152);
 }
 
+/* Base High Contrast Theme */
 [data-theme="high-contrast"] {
   color-scheme: dark;
 
-  /* 1. Define the dynamic main color (Defaults to White) */
+  /* 1. Define Dynamic Variables */
+  --hc-bg: #000000;
   --hc-main: #ffffff;
 
-  /* 2. Map system variables to the dynamic color */
-  --background: #000000;
+  /* 2. Map System Variables */
+  --background: var(--hc-bg);
   --foreground: var(--hc-main);
   --border: var(--hc-main);
 
   --accent: var(--hc-main);
-  --accent-foreground: #000000;
+  --accent-foreground: var(--hc-bg);
 
-  --field-background: #000000;
+  --field-background: var(--hc-bg);
   --field-foreground: var(--hc-main);
   --field-placeholder: var(--hc-main);
 
-  --surface: #000000;
+  --surface: var(--hc-bg);
   --surface-foreground: var(--hc-main);
 
-  --overlay: #000000;
+  --overlay: var(--hc-bg);
   --overlay-foreground: var(--hc-main);
 
-  /* Semantic Colors: In High Contrast, these usually match the text 
-     or maintain specific distinct high-vis colors. 
-     You can map them to --hc-main for a "monochrome terminal" look 
-     or keep them distinct as you had before. */
-  --danger: #ffff00;
-  --danger-foreground: #000000;
-  --success: #00ff00;
-  --success-foreground: #000000;
-  --warning: #00ffff;
-  --warning-foreground: #000000;
+  /* 3. Semantic Colors - UNIFIED MONOCHROME */
+  /* This forces Danger/Success/Warning to match the chosen theme color */
+  --danger: var(--hc-main);
+  --danger-foreground: var(--hc-bg);
+
+  --success: var(--hc-main);
+  --success-foreground: var(--hc-bg);
+
+  --warning: var(--hc-main);
+  --warning-foreground: var(--hc-bg);
 
   --muted: var(--hc-main);
-  --focus: var(--hc-main); /* Changed to match main color for consistency */
+  --focus: var(--hc-main);
 
-  --default: #000000;
+  --default: var(--hc-bg);
   --default-foreground: var(--hc-main);
 
+  /* 4. Reset Radius */
   --radius: 0px;
   --field-radius: 0px;
   --glass-radius: 0px;
 
   --accent-button: var(--hc-main);
-  --accent-button-foreground: #000000;
+  --accent-button-foreground: var(--hc-bg);
+
+  /* 5. THE FIX FOR HEADINGS & TEXT */
+  /* This forces the browser to use the main color for all text 
+     that doesn't have a specific override */
+  color: var(--foreground);
 }
 
-/* 3. Color Overrides */
+/* --- Color Variations --- */
 
-/* Yellow Mode */
+/* Yellow on Black */
 [data-theme="high-contrast"][data-contrast-color="yellow"] {
   --hc-main: #ffff00;
 }
 
-/* Green Mode */
+/* Green on Black */
 [data-theme="high-contrast"][data-contrast-color="green"] {
-  --hc-main: #00ff00; /* Standard Terminal Green */
+  --hc-main: #00ff00;
 }
 
-/* Cyan Mode (Optional extra) */
-[data-theme="high-contrast"][data-contrast-color="cyan"] {
-  --hc-main: #00ffff;
+/* Amber on Black */
+[data-theme="high-contrast"][data-contrast-color="amber"] {
+  --hc-main: #f59e0b;
+}
+
+/* Black on White */
+[data-theme="high-contrast"][data-contrast-color="black"] {
+  color-scheme: light;
+  --hc-bg: #ffffff;
+  --hc-main: #000000;
 }
 
 @theme inline {

@@ -19,7 +19,6 @@ interface HeaderButtonsProps {}
 const HeaderButtons: FunctionComponent<HeaderButtonsProps> = () => {
   const { theme, toggle } = useTheme();
   const playToggle = useAudio("toggle_theme");
-  const { enabled: enabledAudio, toggle: toggleAudio } = useAudioSettings();
 
   // 1. Mobile (default): h-12 w-12 (Large), px-0 (Icon Only look)
   // 2. Desktop (sm:):    h-10 (Medium), w-auto (Text fits), px-4 (Standard padding)
@@ -64,35 +63,6 @@ const HeaderButtons: FunctionComponent<HeaderButtonsProps> = () => {
           <Tooltip.Arrow />
           {m.toggle_theme_to({
             theme: getNextThemeLabel(),
-          })}
-        </Tooltip.Content>
-      </Tooltip>
-
-      <Tooltip>
-        <Button
-          variant="tertiary"
-          className={responsiveBtnClass}
-          onClick={() => {
-            toggleAudio();
-          }}
-          aria-label={m.en_dis_sounds({
-            status: enabledAudio ? m.disable() : m.enable(),
-          })}
-          aria-pressed={enabledAudio}
-        >
-          {enabledAudio ? (
-            <Volume2Icon size={20} />
-          ) : (
-            <VolumeOffIcon size={20} />
-          )}
-          <span className={responsiveTextClass}>
-            {enabledAudio ? m.disable() : m.enable()} {m.sounds()}
-          </span>
-        </Button>
-        <Tooltip.Content>
-          <Tooltip.Arrow />
-          {m.en_dis_sounds({
-            status: enabledAudio ? m.disable() : m.enable(),
           })}
         </Tooltip.Content>
       </Tooltip>
