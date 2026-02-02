@@ -1,0 +1,1 @@
+import{j as o,c as e}from"./index-CT6ppALJ.js";import{S as t}from"./index-BVuwAqzz.js";const c=({children:s,className:a,...r})=>o.jsx(t,{...r,variant:"default",className:e("bg-surface/70 border shadow-lg p-6 rounded-(--glass-radius)",a),children:s});export{c as G};
