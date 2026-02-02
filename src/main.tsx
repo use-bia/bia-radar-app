@@ -1,10 +1,6 @@
 import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
-import {
-  RouterProvider,
-  createMemoryHistory,
-  createRouter,
-} from "@tanstack/react-router";
+import { RouterProvider, createRouter } from "@tanstack/react-router";
 import { getLocale, setLocale } from "@/paraglide/runtime.js";
 
 // Import the generated route tree

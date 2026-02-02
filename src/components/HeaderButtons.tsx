@@ -5,7 +5,6 @@ import { useAudio } from "@/hooks/useAudio";
 import { m } from "@/paraglide/messages";
 import { Button, Tooltip } from "@heroui/react";
 import {
-  DownloadIcon,
   MoonIcon,
   SunIcon,
   ContrastIcon,
@@ -19,7 +18,6 @@ const HeaderButtons: FunctionComponent<HeaderButtonsProps> = () => {
   const { theme, toggle } = useTheme();
   const playToggle = useAudio("toggle_theme");
   const { enabled: enabledAudio, toggle: toggleAudio } = useAudioSettings();
-  const isDownloadAvailable = true;
 
   // 1. Mobile (default): h-12 w-12 (Large), px-0 (Icon Only look)
   // 2. Desktop (sm:):    h-10 (Medium), w-auto (Text fits), px-4 (Standard padding)

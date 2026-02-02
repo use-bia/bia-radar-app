@@ -2,7 +2,7 @@ import { useAudio } from "@/hooks/useAudio";
 import { m } from "@/paraglide/messages";
 import { AlertDialog, Button, cn, Tooltip } from "@heroui/react";
 import { DownloadIcon, XIcon } from "lucide-react";
-import type { FunctionComponent } from "react";
+import { useState, type FunctionComponent } from "react";
 
 interface DownloadBannerProps {
   className?: string;
@@ -11,9 +11,16 @@ interface DownloadBannerProps {
 const DownloadBanner: FunctionComponent<DownloadBannerProps> = ({
   className,
 }) => {
+  const [isDownloadAvailable, _] = useState(true);
+  const [isDismissed, setIsDismissed] = useState(false);
+
   const playDownload = useAudio("download_app");
   const playOpenDialog = useAudio("open_dialog");
   const playCloseDialog = useAudio("close_dialog");
+
+  if (!isDownloadAvailable || isDismissed) {
+    return null;
+  }
 
   return (
     <aside
@@ -95,7 +102,11 @@ const DownloadBanner: FunctionComponent<DownloadBannerProps> = ({
                   <Button slot="close" variant="tertiary">
                     {m.cancel()}
                   </Button>
-                  <Button slot="close" variant="danger">
+                  <Button
+                    slot="close"
+                    variant="danger"
+                    onClick={() => setIsDismissed(true)}
+                  >
                     {m.ignore_download()}
                   </Button>
                 </AlertDialog.Footer>

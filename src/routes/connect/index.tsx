@@ -1,3 +1,4 @@
+import DownloadBanner from "@/components/DownloadBanner";
 import HeaderButtons from "@/components/HeaderButtons";
 import { useAudio } from "@/hooks/useAudio";
 import { m } from "@/paraglide/messages.js";
@@ -13,12 +14,15 @@ export const Route = createFileRoute("/connect/")({
 
 function RouteComponent() {
   const navigate = useNavigate();
-    const playDeviceConnected = useAudio("device_connected");
-  
+  const playDeviceConnected = useAudio("device_connected");
+
   return (
-    <div className="w-full min-h-dvh flex flex-col items-center p-4">
-      <div className="w-full flex justify-end mb-4">
-        <HeaderButtons />
+    <div className="w-full min-h-dvh flex flex-col items-center">
+      <div className="w-full mb-4">
+        <DownloadBanner />
+        <div className="w-full flex justify-end p-4">
+          <HeaderButtons />
+        </div>
       </div>
 
       <div className="flex-1 flex flex-col items-center justify-center w-full">
@@ -44,7 +48,7 @@ function RouteComponent() {
         </p>
       </div>
 
-      <div className="w-full max-w-sm pb-8 px-3 flex flex-col space-y-4">
+      <div className="w-full max-w-sm pb-12 px-3 flex flex-col space-y-4">
         <Button
           variant="primary"
           className="w-full font-bold h-14 capitalize"
@@ -60,7 +64,7 @@ function RouteComponent() {
           variant="secondary"
           className="w-full font-bold h-14 capitalize"
           size="lg"
-          onClick={()=>{
+          onClick={() => {
             playDeviceConnected();
             navigate({ to: "/dashboard" });
           }}

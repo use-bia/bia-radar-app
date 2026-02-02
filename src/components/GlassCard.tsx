@@ -1,6 +1,5 @@
-// src/components/ui/GlassCard.tsx
 import type { FunctionComponent, ReactNode } from "react";
-import { Card, Surface, type CardProps } from "@heroui/react";
+import { Surface, type CardProps } from "@heroui/react";
 import { cn } from "@heroui/react";
 
 interface GlassCardProps extends CardProps {
