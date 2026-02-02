@@ -20,7 +20,7 @@ function RouteComponent() {
             <Volume2Icon className="w-16 h-16" />
           </Button>
           <div className="flex flex-col items-center mt-6 md:mt-10 text-center space-y-4">
-            <h3 className="text-2xl">Localizar BIA-RADAR</h3>
+            <h2 className="text-2xl">Localizar BIA-RADAR</h2>
             <p className="text-muted">
               Use este botão para emitir um sinal sonoro no dispositivo.
             </p>

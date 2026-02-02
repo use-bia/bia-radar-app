@@ -1,14 +1,13 @@
 import { useAudio } from "@/hooks/useAudio";
-import {
-  Description,
-  Dropdown,
-  Header,
-  Kbd,
-  Label,
-  Separator,
-} from "@heroui/react";
+import { Description, Dropdown, Header, Label, Separator } from "@heroui/react";
 import { useNavigate } from "@tanstack/react-router";
-import { LogOutIcon, PaletteIcon, SunIcon } from "lucide-react";
+import {
+  CircleIcon,
+  LogOutIcon,
+  MoonStarIcon,
+  PaletteIcon,
+  SunIcon,
+} from "lucide-react";
 import type { FunctionComponent } from "react";
 
 interface HeaderButtonMenuProps {
@@ -37,79 +36,75 @@ const HeaderButtonMenu: FunctionComponent<HeaderButtonMenuProps> = ({
       <Dropdown.Popover className="border">
         <Dropdown.Menu onAction={(key) => console.log(`Selected: ${key}`)}>
           <Dropdown.Section>
-            <Header>Actions</Header>
-            <Dropdown.Item id="new-file" textValue="New file">
-              <div className="flex h-8 items-start justify-center pt-px">
-                <SunIcon className="size-4 shrink-0 text-muted" />
-              </div>
-              <div className="flex flex-col">
-                <Label>New file</Label>
-                <Description>Create a new file</Description>
-              </div>
-              <Kbd className="ms-auto" slot="keyboard" variant="light">
-                <Kbd.Abbr keyValue="command" />
-                <Kbd.Content>N</Kbd.Content>
-              </Kbd>
-            </Dropdown.Item>
-            <Dropdown.Item id="edit-file" textValue="Edit file">
-              <div className="flex h-8 items-start justify-center pt-px">
-                <SunIcon className="size-4 shrink-0 text-muted" />
-              </div>
-              <div className="flex flex-col">
-                <Label>Edit file</Label>
-                <Description>Make changes</Description>
-              </div>
-              <Kbd className="ms-auto" slot="keyboard" variant="light">
-                <Kbd.Abbr keyValue="command" />
-                <Kbd.Content>E</Kbd.Content>
-              </Kbd>
-            </Dropdown.Item>
-          </Dropdown.Section>
-          <Separator />
-          <Dropdown.Section>
             <Header>Opções de tema</Header>
-
+            <Dropdown.Item id="dark-mode" textValue="Dark mode">
+              <MoonStarIcon className="size-4 shrink-0 text-muted" />
+              <Label>Dark mode</Label>
+            </Dropdown.Item>
             <Dropdown.SubmenuTrigger>
               <Dropdown.Item id="share" textValue="Share">
                 <div className="flex h-8 items-start justify-center pt-px">
                   <PaletteIcon className="size-4 shrink-0 text-muted" />
                 </div>
                 <div className="flex flex-col">
-                  <Label>Alto contraste</Label>
-                  <Description>Alterar cor do tema alto contraste</Description>
+                  <Label>High contrast mode</Label>
+                  <Description>
+                    Change the high contrast theme color
+                  </Description>
                 </div>
                 <Dropdown.SubmenuIndicator />
               </Dropdown.Item>
               <Dropdown.Popover className="border">
                 <Dropdown.Menu>
-                  <Dropdown.Item id="whatsapp" textValue="WhatsApp">
-                    <Label>Branco no fundo preto</Label>
-                  </Dropdown.Item>
-                  <Dropdown.Item id="telegram" textValue="Telegram">
-                    <Label>Amarelo no fundo preto</Label>
-                  </Dropdown.Item>
-                  <Dropdown.Item id="discord" textValue="Discord">
-                    <Label>Verde no fundo preto</Label>
-                  </Dropdown.Item>
-                  <Dropdown.SubmenuTrigger>
-                    <Dropdown.Item id="email" textValue="Email">
-                      <Label>Email</Label>
-                      <Dropdown.SubmenuIndicator />
+                  <Dropdown.Section>
+                    <Header>Dark background</Header>
+                    <Dropdown.Item
+                      id="white-on-black"
+                      textValue="White on black"
+                    >
+                      <CircleIcon className="size-3 fill-white" />
+                      <Label>White on black</Label>
                     </Dropdown.Item>
-                    <Dropdown.Popover>
-                      <Dropdown.Menu>
-                        <Dropdown.Item id="work" textValue="Work email">
-                          <Label>Work email</Label>
-                        </Dropdown.Item>
-                        <Dropdown.Item id="personal" textValue="Personal email">
-                          <Label>Personal email</Label>
-                        </Dropdown.Item>
-                      </Dropdown.Menu>
-                    </Dropdown.Popover>
-                  </Dropdown.SubmenuTrigger>
+                    <Dropdown.Item
+                      id="yellow-on-black"
+                      textValue="Yellow on black"
+                    >
+                      <CircleIcon className="size-3 fill-yellow-500" />
+                      <Label>Yellow on black</Label>
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                      id="amber-on-black"
+                      textValue="Amber on black"
+                    >
+                      <CircleIcon className="size-3 fill-amber-500" />
+                      <Label>Amber on black</Label>
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                      id="green-on-black"
+                      textValue="Green on black"
+                    >
+                      <CircleIcon className="size-3 fill-green-500" />
+                      <Label>Green on black</Label>
+                    </Dropdown.Item>
+                  </Dropdown.Section>
+                  <Separator />
+                  <Dropdown.Section>
+                    <Header>Light background</Header>
+                    <Dropdown.Item
+                      id="black-on-white"
+                      textValue="Black on white"
+                    >
+                      <CircleIcon className="size-3 fill-black" />
+                      <Label>Black on white</Label>
+                    </Dropdown.Item>
+                  </Dropdown.Section>
                 </Dropdown.Menu>
               </Dropdown.Popover>
             </Dropdown.SubmenuTrigger>
+            <Dropdown.Item id="light-mode" textValue="Light mode">
+              <SunIcon className="size-4 shrink-0 text-muted" />
+              <Label>Light mode</Label>
+            </Dropdown.Item>
           </Dropdown.Section>
           <Separator />
           <Dropdown.Section>
