@@ -10,8 +10,10 @@ import {
   Vibrate,
   Wifi,
   ZapIcon,
+  PlayCircle,
+  CheckCircle2,
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 
 export const Route = createFileRoute("/dashboard/guides/")({
   component: RouteComponent,
@@ -32,13 +34,13 @@ interface VideoNode {
 interface SubModule {
   id: string;
   label: string;
-  icon: React.ElementType; // Added icon for the grid buttons
+  icon: React.ElementType;
 }
 
 interface Section {
   id: SectionId;
   label: string;
-  icon: React.ElementType; // Optional icon for the main section tab
+  icon: React.ElementType;
   subModules?: SubModule[];
 }
 
@@ -61,10 +63,8 @@ const SECTIONS: Section[] = [
       { id: "index", label: "Módulo Index", icon: Fingerprint },
       { id: "differential", label: "Diferencial", icon: GitCompare },
       { id: "wireless", label: "Wireless", icon: Wifi },
-      { id: "wireless1", label: "Wireless", icon: Wifi },
-      { id: "wireless2", label: "Wireless", icon: Wifi },
-      { id: "wireless3", label: "Wireless", icon: Wifi },
-      { id: "wireless4", label: "Wireless", icon: Wifi },
+      { id: "wireless1", label: "Wireless A", icon: Wifi },
+      { id: "wireless2", label: "Wireless B", icon: Wifi },
     ],
   },
   { id: "advanced", label: "Pro", icon: Settings2Icon },
@@ -103,6 +103,46 @@ const VIDEOS: Record<string, Record<string, VideoNode[]>> = {
     light: [
       {
         id: "a1",
+        title: "Instalação da Luz",
+        description: "Como acoplar o módulo de luz noturna.",
+        duration: "1:45",
+        thumb:
+          "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=60",
+      },
+      {
+        id: "a2",
+        title: "Instalação da Luz",
+        description: "Como acoplar o módulo de luz noturna.",
+        duration: "1:45",
+        thumb:
+          "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=60",
+      },
+      {
+        id: "a3",
+        title: "Instalação da Luz",
+        description: "Como acoplar o módulo de luz noturna.",
+        duration: "1:45",
+        thumb:
+          "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=60",
+      },
+      {
+        id: "a4",
+        title: "Instalação da Luz",
+        description: "Como acoplar o módulo de luz noturna.",
+        duration: "1:45",
+        thumb:
+          "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=60",
+      },
+      {
+        id: "a5",
+        title: "Instalação da Luz",
+        description: "Como acoplar o módulo de luz noturna.",
+        duration: "1:45",
+        thumb:
+          "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=60",
+      },
+      {
+        id: "a6",
         title: "Instalação da Luz",
         description: "Como acoplar o módulo de luz noturna.",
         duration: "1:45",
@@ -175,42 +215,171 @@ const VIDEOS: Record<string, Record<string, VideoNode[]>> = {
   },
 };
 
+// --- TIMELINE COMPONENT ---
+
+const VideoTimeline = ({
+  videos,
+  viewedVideos,
+  onVideoClick,
+}: {
+  videos: VideoNode[];
+  viewedVideos: Set<string>;
+  onVideoClick: (id: string) => void;
+}) => {
+  if (!videos?.length)
+    return (
+      <div className="text-center py-10 opacity-50 text-muted">
+        Nenhum vídeo disponível.
+      </div>
+    );
+
+  return (
+    <div className="relative w-full max-w-5xl mx-auto py-8">
+      {/* The Timeline Line: Uses border color for neutrality */}
+      <div className="absolute top-0 bottom-0 left-6 md:left-1/2 w-0.5 bg-border -translate-x-1/2" />
+
+      <div className="flex flex-col gap-10">
+        {videos.map((video, idx) => {
+          const isEven = idx % 2 === 0;
+          const isViewed = viewedVideos.has(video.id);
+
+          return (
+            <div
+              key={video.id}
+              className={cn(
+                "relative flex w-full md:w-1/2",
+                // Desktop: Alternate sides
+                isEven
+                  ? "md:mr-auto md:pr-12 md:flex-row-reverse"
+                  : "md:ml-auto md:pl-12",
+                // Mobile: Always right of the line
+                "pl-14 md:pl-0",
+              )}
+            >
+              {/* The Dot */}
+              <div
+                className={cn(
+                  "absolute top-6 w-4 h-4 rounded-full border-2 z-10 transition-colors",
+                  isViewed
+                    ? "bg-accent border-accent"
+                    : "bg-muted border-transparent",
+                  // Dot Position Logic
+                  "left-6 md:left-auto", // Mobile fixed left
+                  isEven ? "md:-right-2" : "md:-left-2", // Desktop alternating
+                  "-translate-x-1/2",
+                )}
+              />
+
+              {/* The Card */}
+              <div
+                onClick={() => onVideoClick(video.id)}
+                className={cn(
+                  "group relative w-full bg-surface border border-border rounded-xl p-3 shadow-sm transition-all cursor-pointer flex gap-4",
+                  // Hover effects: subtle lift and border change using semantic colors
+                  "hover:shadow-md hover:border-default",
+                  "flex-col sm:flex-row",
+                )}
+              >
+                {/* Thumb */}
+                <div className="relative w-full sm:w-40 aspect-video rounded-lg overflow-hidden shrink-0 bg-default">
+                  <img
+                    src={video.thumb}
+                    alt={video.title}
+                    className="w-full h-full object-cover transition-transform group-hover:scale-105"
+                  />
+                  {/* Overlay using strict black/opacity for media contrast, or overlay var */}
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <PlayCircle className="text-white w-8 h-8" />
+                  </div>
+                  <span className="absolute bottom-1 right-1 bg-black/60 text-white text-[10px] px-1.5 rounded">
+                    {video.duration}
+                  </span>
+                </div>
+
+                {/* Text */}
+                <div
+                  className={cn(
+                    "flex flex-col justify-center",
+                    isEven
+                      ? "md:text-right md:items-end"
+                      : "md:text-left md:items-start",
+                    "text-left items-start",
+                  )}
+                >
+                  <h3
+                    className={cn(
+                      "font-semibold leading-tight flex items-center gap-2",
+                      isViewed ? "text-muted" : "text-foreground",
+                    )}
+                  >
+                    {video.title}
+                    {isViewed && (
+                      <CheckCircle2 className="w-4 h-4 text-success shrink-0" />
+                    )}
+                  </h3>
+                  <p className="text-sm text-muted mt-1 line-clamp-2">
+                    {video.description}
+                  </p>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
+// --- MAIN COMPONENT ---
+
 function RouteComponent() {
-  // Navigation State
+  const [activeSection, setActiveSection] = useState<string>("basic");
   const [activeSubModule, setActiveSubModule] = useState<string>("default");
   const [viewedVideos, setViewedVideos] = useState<Set<string>>(new Set());
 
-  // Handle Tab Change (Reset SubModule logic)
-  const handleTabChange = (key: React.Key) => {
-    const section = SECTIONS.find((s) => s.id === key);
-    if (section?.subModules && section.subModules.length > 0) {
-      setActiveSubModule(section.subModules[0].id);
+  // Handle Main Tab Change
+  const handleSectionChange = (key: React.Key) => {
+    const sectionId = key as string;
+    setActiveSection(sectionId);
+
+    // Logic: If new section has submodules, pick the first one. Otherwise 'default'.
+    const sectionData = SECTIONS.find((s) => s.id === sectionId);
+    if (sectionData?.subModules && sectionData.subModules.length > 0) {
+      setActiveSubModule(sectionData.subModules[0].id);
     } else {
       setActiveSubModule("default");
     }
   };
 
-  const handleVideoClick = (videoId: string) => {
-    const newViewed = new Set(viewedVideos);
-    newViewed.add(videoId);
-    setViewedVideos(newViewed);
-    console.log("Playing:", videoId);
-  };
+  // Get current videos based on BOTH section and submodule
+  const currentVideos = useMemo(() => {
+    return VIDEOS[activeSection]?.[activeSubModule] || [];
+  }, [activeSection, activeSubModule]);
 
   return (
-    <div className="animate-in fade-in duration-500 flex flex-col gap-8 items-center w-full">
-      <Tabs className="w-full items-center">
+    <div className="animate-in fade-in duration-500 flex flex-col gap-8 items-center w-full min-h-screen">
+      {/* --- MAIN TABS --- */}
+      <Tabs
+        selectedKey={activeSection}
+        onSelectionChange={handleSectionChange}
+        className="w-full items-center sticky top-0 py-4 z-20"
+      >
         <Tabs.ListContainer>
           <Tabs.List
             aria-label="Options"
-            className="*:data-[selected=true]:text-black h-16 rounded-full p-2 w-fit mx-auto"
+            className={cn(
+              "h-16 rounded-full p-2 w-fit mx-auto border",
+              // Semantic Colors: Surface for card-like bg, Border for outline
+              "bg-surface border-border",
+              // Text colors handling
+              "*:data-[selected=true]:text-accent-foreground text-muted",
+            )}
           >
             {SECTIONS.map((section) => (
               <Tabs.Tab
                 key={section.id}
                 id={section.id}
-                onClick={() => handleTabChange(section.id)}
-                className="flex items-center gap-2 h-full rounded-full px-8"
+                className="flex items-center gap-2 h-full rounded-full px-8 transition-all"
               >
                 {section.icon && (
                   <section.icon className="w-4 h-4" aria-hidden="true" />
@@ -221,24 +390,26 @@ function RouteComponent() {
             ))}
           </Tabs.List>
         </Tabs.ListContainer>
-        <Tabs.Panel className="pt-4" id="overview">
-          <p>View your project overview and recent activity.</p>
-        </Tabs.Panel>
-        <Tabs.Panel className="pt-4" id="analytics">
-          <p>Track your metrics and analyze performance data.</p>
-        </Tabs.Panel>
-        <Tabs.Panel className="pt-4" id="reports">
-          <p>Generate and download detailed reports.</p>
-        </Tabs.Panel>
+
+        {/* --- PANELS --- */}
         {SECTIONS.map((section) => (
-          <Tabs.Panel key={section.id} className="" id={section.id}>
+          <Tabs.Panel
+            key={section.id}
+            id={section.id}
+            className="w-full px-4 pt-4 max-w-5xl"
+          >
+            {/* SUBMODULE TABS (Only if present) */}
             {section.subModules && section.subModules.length > 0 ? (
-              <div className="flex justify-center">
-                <Tabs hideSeparator>
+              <div className="flex justify-center mb-8">
+                <Tabs
+                  selectedKey={activeSubModule}
+                  onSelectionChange={(k) => setActiveSubModule(k as string)}
+                  hideSeparator
+                >
                   <Tabs.ListContainer>
                     <Tabs.List
                       className={cn(
-                        "w-fit grid grid-cols-5 gap-3 mb-6 bg-transparent",
+                        "w-fit grid grid-cols-2 md:grid-cols-5 gap-3 bg-transparent",
                         "*:data-[selected=true]:text-accent",
                         "*:data-[selected=true]:border-accent",
                         "*:data-[selected=true]:shadow-md",
@@ -249,12 +420,16 @@ function RouteComponent() {
                         <Tabs.Tab
                           key={sub.id}
                           id={sub.id}
-                          onClick={() => setActiveSubModule(sub.id)}
-                          className="flex flex-col items-center h-26 w-26 justify-center p-0 rounded-4xl border"
+                          className={cn(
+                            "flex flex-col items-center h-26 w-26 justify-center p-0 rounded-4xl border transition-all",
+                            // Inactive borders use the semantic 'border' variable
+                            "border-border",
+                          )}
                         >
                           <div
                             className={cn(
                               "flex h-full w-full rounded-t-4xl justify-center items-center pt-3 transition-all",
+                              // Toggle between Surface (card) and Background (canvas)
                               activeSubModule === sub.id
                                 ? "bg-surface"
                                 : "bg-background",
@@ -265,15 +440,15 @@ function RouteComponent() {
 
                           <div
                             className={cn(
-                              "w-full rounded-b-4xl p-1",
+                              "w-full rounded-b-4xl p-1 text-center text-sm",
                               activeSubModule === sub.id
-                                ? " text-accent-foreground"
-                                : " text-surface-foreground border-t",
+                                ? "text-foreground"
+                                : "text-foreground border-t border-border",
                             )}
                           >
                             {sub.label}
                           </div>
-                          <Tabs.Indicator className="rounded-4xl bg-accent" />
+                          <Tabs.Indicator className="rounded-4xl bg-accent opacity-10" />
                         </Tabs.Tab>
                       ))}
                     </Tabs.List>
@@ -281,27 +456,18 @@ function RouteComponent() {
                 </Tabs>
               </div>
             ) : null}
-            {/* {VIDEOS[section.id]["default"]?.map((video) => (
-              <div
-                key={video.id}
-                className={cn(
-                  "flex items-center gap-4 p-4 border rounded-lg cursor-pointer",
-                  viewedVideos.has(video.id) ? "bg-green-50" : "bg-white",
-                )}
-                onClick={() => handleVideoClick(video.id)}
-              >
-                <img
-                  src={video.thumb}
-                  alt={`${video.title} thumbnail`}
-                  className="w-24 h-16 object-cover rounded"
-                />
-                <div>
-                  <h3 className="font-medium">{video.title}</h3>
-                  <p className="text-sm text-muted">{video.description}</p>
-                  <span className="text-xs text-muted">{video.duration}</span>
-                </div>
-              </div>
-            ))} */}
+
+            {/* --- VIDEO ROADMAP RENDERED HERE --- */}
+            <VideoTimeline
+              videos={currentVideos}
+              viewedVideos={viewedVideos}
+              onVideoClick={(id) => {
+                const newSet = new Set(viewedVideos);
+                newSet.add(id);
+                setViewedVideos(newSet);
+                console.log("Open video", id);
+              }}
+            />
           </Tabs.Panel>
         ))}
       </Tabs>
