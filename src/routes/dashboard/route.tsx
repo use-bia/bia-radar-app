@@ -25,6 +25,7 @@ const options = linkOptions([
   {
     to: "/dashboard/status",
     label: m.status(),
+    subtitle: m.status_subtitle(),
     icon: <RadioIcon aria-hidden="true" className="w-6 h-6" />,
     activeOptions: {
       exact: false,
@@ -33,6 +34,7 @@ const options = linkOptions([
   {
     to: "/dashboard/guides",
     label: m.video_guide(),
+    subtitle: m.video_guide_subtitle(),
     icon: <MonitorPlayIcon aria-hidden="true" className="w-6 h-6" />,
     activeOptions: {
       exact: false,
@@ -41,6 +43,7 @@ const options = linkOptions([
   {
     to: "/dashboard/adjusts",
     label: m.settings(),
+    subtitle: m.ajustes_subtitle(),
     icon: <SettingsIcon aria-hidden="true" className="w-6 h-6" />,
     activeOptions: {
       exact: false,
@@ -113,11 +116,11 @@ function RouteComponent() {
       <main className="relative w-full min-h-dvh flex flex-col justify-center">
         <DownloadBanner className="z-1" />
 
-        <div className="z-1 px-8 sm:px-12 md:px-6 pt-8 w-full h-full max-w-5xl mx-auto">
+        <div className="z-1 px-5 sm:px-12 md:px-6 pt-8 w-full h-full max-w-4xl mx-auto">
           <header className="mb-8 flex items-center justify-between">
             <div className="space-y-2">
-              <h1 className="text-3xl font-semibold">{currentOption?.label}</h1>
-              <p> Configsdkfjksdfjskldfjklsdfjkj </p>
+              <h2 className="text-3xl font-semibold">{currentOption?.label}</h2>
+              <p className="text-muted"> {currentOption?.subtitle} </p>
             </div>
             <div>
               <HeaderButtons />

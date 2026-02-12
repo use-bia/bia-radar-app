@@ -30,5 +30,14 @@
   "cancel": "Cancelar",
   "ignore_download": "Ignorar download",
   "dismiss_download_message_1": "Para ter a melhor experiência nós recomendamos baixar o aplicativo BIA-RADAR.",
-  "dismiss_download_message_2": "Você pode fechar essa mensagem e continuar usando a aplicação web, mas algumas funcionalidades podem estar limitadas. Mas não se preocupe, você pode baixar o aplicativo a qualquer momento clicando no botão 'Baixar App' no menu."
+  "dismiss_download_message_2": "Você pode fechar essa mensagem e continuar usando a aplicação web, mas algumas funcionalidades podem estar limitadas. Mas não se preocupe, você pode baixar o aplicativo a qualquer momento clicando no botão 'Baixar App' no menu.",
+  "status_subtitle": "Minha BIA-RADAR",
+  "ajustes_subtitle": "Calibração e Preferências",
+  "video_guide_subtitle": "Aprenda a usar a sua BIA-RADAR",
+  "height_cm": "Altura (cm)",
+  "left": "Esquerda",
+  "right": "Direita",
+  "other": "Outro",
+  "personalization": "Personalização",
+  "hardware": "Hardware"
 }

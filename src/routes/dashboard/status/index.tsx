@@ -1,7 +1,13 @@
 import { GlassCard } from "@/components/GlassCard";
 import { Button, Card } from "@heroui/react";
 import { createFileRoute } from "@tanstack/react-router";
-import { BatteryIcon, ChevronRightIcon, CloudDownloadIcon, Volume2Icon } from "lucide-react";
+import {
+  BatteryIcon,
+  ChevronRightIcon,
+  CloudDownloadIcon,
+  Volume2Icon,
+  WifiIcon,
+} from "lucide-react";
 
 export const Route = createFileRoute("/dashboard/status/")({
   component: RouteComponent,
@@ -9,7 +15,7 @@ export const Route = createFileRoute("/dashboard/status/")({
 
 function RouteComponent() {
   return (
-    <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+    <div className="grid grid-rows-4 grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
       <GlassCard className="aspect-square col-span-2 row-span-2">
         <div className="flex flex-col items-center justify-center h-full">
           <Button
@@ -28,7 +34,7 @@ function RouteComponent() {
         </div>
       </GlassCard>
 
-      <GlassCard className="col-span-2 row-span-1 w-full h-full">
+      <GlassCard className="col-span-2 row-span-1 w-full h-full flex items-center justify-center">
         <div className="flex w-full justify-between items-center p-4 gap-4">
           <div className="bg-surface-secondary p-4 rounded-4xl text-muted">
             <CloudDownloadIcon />
@@ -36,17 +42,29 @@ function RouteComponent() {
 
           <div className="w-full">
             <h3>Atualização de Software</h3>
-            <p className="text-muted text-sm uppercase tracking-widest">V2.4.1 Disponível</p>
+            <p className="text-muted text-sm uppercase tracking-widest">
+              V2.4.1 Disponível
+            </p>
           </div>
-          <ChevronRightIcon className="text-muted"/>
+          <ChevronRightIcon className="text-muted" />
         </div>
       </GlassCard>
       <GlassCard className="col-span-1 row-span-1 aspect-square">
         <div className="flex flex-col p-4 gap-4 h-full justify-center items-center">
-          <BatteryIcon className="text-accent w-10 h-10"/>
-          <p className="text-2xl">
-            84%
-          </p>
+          <BatteryIcon className="text-accent w-10 h-10" />
+          <div>
+            <p className="text-2xl">84%</p>
+            <p className="text-sm text-muted uppercase">Bateria</p>
+          </div>
+        </div>
+      </GlassCard>
+      <GlassCard className="col-span-1 row-span-1 aspect-square">
+        <div className="flex flex-col p-4 gap-4 h-full justify-center items-center">
+          <WifiIcon className="text-muted w-10 h-10" />
+          <div>
+            <p className="text-2xl uppercase">PREMIUM</p>
+            <p className="text-sm text-muted uppercase">conexão</p>
+          </div>
         </div>
       </GlassCard>
     </div>
