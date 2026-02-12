@@ -39,5 +39,7 @@
   "right": "Direita",
   "other": "Outro",
   "personalization": "Personalização",
-  "hardware": "Hardware"
+  "hardware": "Hardware",
+  "principal_hand": "Mão principal",
+  "sensor_auto_test": "Teste automático dos sensores"
 }

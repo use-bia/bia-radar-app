@@ -1,7 +1,7 @@
 import { GlassCard } from "@/components/GlassCard";
 import { m } from "@/paraglide/messages";
-import { Button, cn, Input, InputGroup, Label, Slider } from "@heroui/react";
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { Button, cn, InputGroup, Slider } from "@heroui/react";
+import { createFileRoute } from "@tanstack/react-router";
 import {
   ChevronRightIcon,
   HandIcon,
@@ -100,7 +100,7 @@ function RouteComponent() {
               <div className="h-fit p-3 bg-surface-secondary aspect-square rounded-4xl flex ">
                 <HandIcon aria-hidden="true" className="text-muted" />
               </div>
-              <h3 className="text-lg">Mão principal</h3>
+              <h3 className="text-lg">{m.principal_hand()}</h3>
             </div>
             <div className="flex justify-between gap-2 sm:gap-4 md:gap-6 h-20">
               {handOptions.map((option) => (
@@ -132,7 +132,7 @@ function RouteComponent() {
             </div>
 
             <div className="w-full">
-              <h3 className="text-lg">Autoteste do Sensor</h3>
+              <h3 className="text-lg">{m.sensor_auto_test()}</h3>
             </div>
             <ChevronRightIcon className="text-muted" />
           </div>
