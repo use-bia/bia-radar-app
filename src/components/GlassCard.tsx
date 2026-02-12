@@ -46,8 +46,9 @@ export const GlassButton: FunctionComponent<GlassButtonProps> = ({
         "bg-surface/70 border shadow-lg p-6 rounded-(--glass-radius)",
         // Interactive States
         "hover:bg-surface/90 active:scale-[0.99]",
-        // Accessibility Focus Ring (Critical for navigation)
+        // Accessibility: Focus Ring & Cursor
         "outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2",
+        "cursor-pointer",
         className,
       )}
       {...props}

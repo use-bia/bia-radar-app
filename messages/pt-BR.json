@@ -31,7 +31,7 @@
   "ignore_download": "Ignorar download",
   "dismiss_download_message_1": "Para ter a melhor experiência nós recomendamos baixar o aplicativo BIA-RADAR.",
   "dismiss_download_message_2": "Você pode fechar essa mensagem e continuar usando a aplicação web, mas algumas funcionalidades podem estar limitadas. Mas não se preocupe, você pode baixar o aplicativo a qualquer momento clicando no botão 'Baixar App' no menu.",
-  "status_subtitle": "Minha BIA-RADAR",
+  "status_subtitle": "Gerencie tudo em um só lugar",
   "ajustes_subtitle": "Calibração e Preferências",
   "video_guide_subtitle": "Aprenda a usar a sua BIA-RADAR",
   "height_cm": "Altura (cm)",
@@ -42,5 +42,14 @@
   "hardware": "Hardware",
   "principal_hand": "Mão principal",
   "sensor_auto_test": "Teste automático dos sensores",
-  "your_height": "Sua altura"
+  "your_height": "Sua altura",
+  "find_bia_radar": "Encontrar BIA-RADAR",
+  "use_this_button_to_emit_a_sound": "Use este botão para emitir um sinal sonoro e localizar seu BIA-RADAR",
+  "software_update": "Atualização de Software",
+  "available": "Disponível",
+  "battery": "Bateria",
+  "connection": "Conexão",
+  "premium": "Premium",
+  "my_device": "Meu dispositivo",
+  "bia_utilizes_this_info_to_better_understand_your": "Qual lado você costuma segurar sua bengala? A BIA utiliza essas informações para entender melhor seu ambiente e fornecer feedback preciso."
 }

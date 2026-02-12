@@ -31,7 +31,7 @@
   "ignore_download": "Ignore download",
   "dismiss_download_message_1": "For the best experience we recommend downloading the BIA-RADAR app.",
   "dismiss_download_message_2": "You can dismiss this message and continue using the web application, but some features may be limited. But don't worry, you can download the app at any time by clicking the 'Download App' button in the menu.",
-  "status_subtitle": "My BIA-RADAR",
+  "status_subtitle": "Manage everything in one place",
   "ajustes_subtitle": "Calibration and Preferences",
   "video_guide_subtitle": "Learn how to use your BIA-RADAR",
   "height_cm": "Height (cm)",
@@ -42,5 +42,14 @@
   "hardware": "Hardware",
   "principal_hand": "Principal hand",
   "sensor_auto_test": "Sensor auto test",
-  "your_height": "Your height"
+  "your_height": "Your height",
+  "find_bia_radar": "Find BIA-RADAR",
+  "use_this_button_to_emit_a_sound": "Use this button to emit a sound signal and locate your BIA-RADAR",
+  "software_update": "Software Update",
+  "available": "Available",
+  "battery": "Battery",
+  "connection": "Connection",
+  "premium": "Premium",
+  "my_device": "My Device",
+  "bia_utilizes_this_info_to_better_understand_your": "BIA utilizes this info to better understand your surroundings and provide accurate feedback."
 }
