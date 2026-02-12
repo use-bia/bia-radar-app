@@ -61,6 +61,10 @@ const SECTIONS: Section[] = [
       { id: "index", label: "Módulo Index", icon: Fingerprint },
       { id: "differential", label: "Diferencial", icon: GitCompare },
       { id: "wireless", label: "Wireless", icon: Wifi },
+      { id: "wireless1", label: "Wireless", icon: Wifi },
+      { id: "wireless2", label: "Wireless", icon: Wifi },
+      { id: "wireless3", label: "Wireless", icon: Wifi },
+      { id: "wireless4", label: "Wireless", icon: Wifi },
     ],
   },
   { id: "advanced", label: "Pro", icon: Settings2Icon },
@@ -173,7 +177,7 @@ const VIDEOS: Record<string, Record<string, VideoNode[]>> = {
 
 function RouteComponent() {
   // Navigation State
-  const [_, setActiveSubModule] = useState<string>("default");
+  const [activeSubModule, setActiveSubModule] = useState<string>("default");
   const [viewedVideos, setViewedVideos] = useState<Set<string>>(new Set());
 
   // Handle Tab Change (Reset SubModule logic)
@@ -227,30 +231,57 @@ function RouteComponent() {
           <p>Generate and download detailed reports.</p>
         </Tabs.Panel>
         {SECTIONS.map((section) => (
-          <Tabs.Panel key={section.id} className="pt-4" id={section.id}>
+          <Tabs.Panel key={section.id} className="" id={section.id}>
             {section.subModules && section.subModules.length > 0 ? (
-              <Tabs>
-                <Tabs.ListContainer>
-                  <Tabs.List className="*:data-[selected=true]:text-black grid grid-cols-5 gap-4 mb-6 bg-transparent">
-                    {section.subModules.map((sub) => (
-                      <Tabs.Tab
-                        key={sub.id}
-                        id={sub.id}
-                        onClick={() => setActiveSubModule(sub.id)}
-                        className="flex items-center gap-2 h-16 px-8 aspect-square justify-center border"
-                      >
-                        {sub.icon && (
-                          <sub.icon className="w-4 h-4" aria-hidden="true" />
-                        )}
-                        {sub.label}
-                        <Tabs.Indicator className="bg-accent" />
-                      </Tabs.Tab>
-                    ))}
-                  </Tabs.List>
-                </Tabs.ListContainer>
-              </Tabs>
+              <div className="flex justify-center">
+                <Tabs hideSeparator>
+                  <Tabs.ListContainer>
+                    <Tabs.List
+                      className={cn(
+                        "w-fit grid grid-cols-5 gap-3 mb-6 bg-transparent",
+                        "*:data-[selected=true]:text-accent",
+                        "*:data-[selected=true]:border-accent",
+                        "*:data-[selected=true]:shadow-md",
+                        "*:data-[selected=true]:border-2",
+                      )}
+                    >
+                      {section.subModules.map((sub) => (
+                        <Tabs.Tab
+                          key={sub.id}
+                          id={sub.id}
+                          onClick={() => setActiveSubModule(sub.id)}
+                          className="flex flex-col items-center h-26 w-26 justify-center p-0 rounded-4xl border"
+                        >
+                          <div
+                            className={cn(
+                              "flex h-full w-full rounded-t-4xl justify-center items-center pt-3 transition-all",
+                              activeSubModule === sub.id
+                                ? "bg-surface"
+                                : "bg-background",
+                            )}
+                          >
+                            <sub.icon className="w-8 h-8" aria-hidden="true" />
+                          </div>
+
+                          <div
+                            className={cn(
+                              "w-full rounded-b-4xl p-1",
+                              activeSubModule === sub.id
+                                ? " text-accent-foreground"
+                                : " text-surface-foreground border-t",
+                            )}
+                          >
+                            {sub.label}
+                          </div>
+                          <Tabs.Indicator className="rounded-4xl bg-accent" />
+                        </Tabs.Tab>
+                      ))}
+                    </Tabs.List>
+                  </Tabs.ListContainer>
+                </Tabs>
+              </div>
             ) : null}
-            {VIDEOS[section.id]["default"]?.map((video) => (
+            {/* {VIDEOS[section.id]["default"]?.map((video) => (
               <div
                 key={video.id}
                 className={cn(
@@ -270,7 +301,7 @@ function RouteComponent() {
                   <span className="text-xs text-muted">{video.duration}</span>
                 </div>
               </div>
-            ))}
+            ))} */}
           </Tabs.Panel>
         ))}
       </Tabs>
