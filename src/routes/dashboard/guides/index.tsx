@@ -1,152 +1,279 @@
-import { GlassButton, GlassCard } from "@/components/GlassCard";
-import { m } from "@/paraglide/messages";
+import { cn, Tabs } from "@heroui/react";
 import { createFileRoute } from "@tanstack/react-router";
-import { InfoIcon, PlayIcon, YoutubeIcon } from "lucide-react";
-import { cn } from "@heroui/react";
+import {
+  BoxIcon,
+  CpuIcon,
+  Fingerprint,
+  GitCompare,
+  Lightbulb,
+  Settings2Icon,
+  Vibrate,
+  Wifi,
+  ZapIcon,
+} from "lucide-react";
+import { useState } from "react";
 
 export const Route = createFileRoute("/dashboard/guides/")({
   component: RouteComponent,
 });
 
-// Mock Data - In a real app, this would come from your loader or API
-const TUTORIALS = [
+// --- DATA & TYPES ---
+
+type SectionId = "basic" | "attachments" | "modules" | "advanced";
+
+interface VideoNode {
+  id: string;
+  title: string;
+  description: string;
+  duration: string;
+  thumb: string;
+}
+
+interface SubModule {
+  id: string;
+  label: string;
+  icon: React.ElementType; // Added icon for the grid buttons
+}
+
+interface Section {
+  id: SectionId;
+  label: string;
+  icon: React.ElementType; // Optional icon for the main section tab
+  subModules?: SubModule[];
+}
+
+const SECTIONS: Section[] = [
+  { id: "basic", label: "Início", icon: BoxIcon },
   {
-    id: "1",
-    title: "Unboxing e Montagem",
-    duration: "1:20",
-    category: "Básico",
-    thumb:
-      "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=400&q=80",
+    id: "attachments",
+    label: "Acessórios",
+    icon: ZapIcon,
+    subModules: [
+      { id: "light", label: "Luz Auxiliar", icon: Lightbulb },
+      { id: "motor", label: "Motor Tátil", icon: Vibrate },
+    ],
   },
   {
-    id: "2",
-    title: "Primeira Configuração",
-    duration: "2:15",
-    category: "Setup",
-    thumb:
-      "https://images.unsplash.com/photo-1516733725897-1aa73b87c8e8?w=400&q=80",
+    id: "modules",
+    label: "Módulos",
+    icon: CpuIcon,
+    subModules: [
+      { id: "index", label: "Módulo Index", icon: Fingerprint },
+      { id: "differential", label: "Diferencial", icon: GitCompare },
+      { id: "wireless", label: "Wireless", icon: Wifi },
+    ],
   },
-  {
-    id: "3",
-    title: "Calibração dos Sensores",
-    duration: "3:40",
-    category: "Avançado",
-    thumb:
-      "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=400&q=80",
-  },
-  {
-    id: "4",
-    title: "Dicas de Uso Diário",
-    duration: "1:55",
-    category: "Dicas",
-    thumb:
-      "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=400&q=80",
-  },
+  { id: "advanced", label: "Pro", icon: Settings2Icon },
 ];
 
+const VIDEOS: Record<string, Record<string, VideoNode[]>> = {
+  basic: {
+    default: [
+      {
+        id: "b1",
+        title: "Unboxing & Montagem",
+        description: "O que vem na caixa e como preparar seu dispositivo.",
+        duration: "1:20",
+        thumb:
+          "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&q=60",
+      },
+      {
+        id: "b2",
+        title: "Primeira Carga",
+        description: "Cuidados essenciais com a bateria.",
+        duration: "0:45",
+        thumb:
+          "https://images.unsplash.com/photo-1617788138017-80ad40651399?w=800&q=60",
+      },
+      {
+        id: "b3",
+        title: "Configuração Inicial",
+        description: "Conectando ao app e primeiros passos.",
+        duration: "2:10",
+        thumb:
+          "https://images.unsplash.com/photo-1516733725897-1aa73b87c8e8?w=800&q=60",
+      },
+    ],
+  },
+  attachments: {
+    light: [
+      {
+        id: "a1",
+        title: "Instalação da Luz",
+        description: "Como acoplar o módulo de luz noturna.",
+        duration: "1:45",
+        thumb:
+          "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=60",
+      },
+    ],
+    motor: [
+      {
+        id: "a2",
+        title: "Feedback Tátil",
+        description: "Entendendo os padrões de vibração.",
+        duration: "2:30",
+        thumb:
+          "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=60",
+      },
+    ],
+  },
+  modules: {
+    index: [
+      {
+        id: "m1",
+        title: "Instalação Index",
+        description: "Acoplando o sensor principal.",
+        duration: "3:10",
+        thumb:
+          "https://images.unsplash.com/photo-1589254065878-42c9da997008?w=800&q=60",
+      },
+      {
+        id: "m2",
+        title: "Calibração Index",
+        description: "Ajuste fino para precisão máxima.",
+        duration: "2:00",
+        thumb:
+          "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=60",
+      },
+    ],
+    differential: [
+      {
+        id: "m3",
+        title: "Modo Diferencial",
+        description: "Como funciona a navegação relativa.",
+        duration: "4:15",
+        thumb:
+          "https://images.unsplash.com/photo-1581092921461-eab62e97a783?w=800&q=60",
+      },
+    ],
+    wireless: [
+      {
+        id: "m4",
+        title: "Pareamento",
+        description: "Conectando sem fios.",
+        duration: "1:30",
+        thumb:
+          "https://images.unsplash.com/photo-1591405351990-4726e331f141?w=800&q=60",
+      },
+    ],
+  },
+  advanced: {
+    default: [
+      {
+        id: "pro1",
+        title: "Menu de Desenvolvedor",
+        description: "Acessando recursos ocultos.",
+        duration: "4:20",
+        thumb:
+          "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=60",
+      },
+    ],
+  },
+};
+
 function RouteComponent() {
-  return (
-    <div className="w-full space-y-8 animate-in fade-in duration-500">
-      {/* Header Section */}
-      <header className="flex justify-between items-end pb-2 border-b border-border/10">
-        <div className="space-y-1">
-          <h1 className="text-muted uppercase tracking-[0.4em] text-sm">
-            {m.guides?.() ?? "Guias"}
-          </h1>
-          <p className="text-2xl font-medium text-foreground">
-            {m.learn_to_use?.() ?? "Aprenda a usar sua BIA"}
-          </p>
-        </div>
-        <div
-          className="p-3 bg-red-500/10 rounded-full text-red-500"
-          aria-hidden="true"
-        >
-          <YoutubeIcon size={24} />
-        </div>
-      </header>
+  // Navigation State
+  const [_, setActiveSubModule] = useState<string>("default");
+  const [viewedVideos, setViewedVideos] = useState<Set<string>>(new Set());
 
-      {/* Video Grid */}
-      <div
-        className="grid grid-cols-1 md:grid-cols-2 gap-5"
-        role="list"
-        aria-label="Lista de vídeos tutoriais"
-      >
-        {TUTORIALS.map((video) => (
-          <VideoCard key={video.id} video={video} />
+  // Handle Tab Change (Reset SubModule logic)
+  const handleTabChange = (key: React.Key) => {
+    const section = SECTIONS.find((s) => s.id === key);
+    if (section?.subModules && section.subModules.length > 0) {
+      setActiveSubModule(section.subModules[0].id);
+    } else {
+      setActiveSubModule("default");
+    }
+  };
+
+  const handleVideoClick = (videoId: string) => {
+    const newViewed = new Set(viewedVideos);
+    newViewed.add(videoId);
+    setViewedVideos(newViewed);
+    console.log("Playing:", videoId);
+  };
+
+  return (
+    <div className="animate-in fade-in duration-500 flex flex-col gap-8 items-center w-full">
+      <Tabs className="w-full items-center">
+        <Tabs.ListContainer>
+          <Tabs.List
+            aria-label="Options"
+            className="*:data-[selected=true]:text-black h-16 rounded-full p-2 w-fit mx-auto"
+          >
+            {SECTIONS.map((section) => (
+              <Tabs.Tab
+                key={section.id}
+                id={section.id}
+                onClick={() => handleTabChange(section.id)}
+                className="flex items-center gap-2 h-full rounded-full px-8"
+              >
+                {section.icon && (
+                  <section.icon className="w-4 h-4" aria-hidden="true" />
+                )}
+                {section.label}
+                <Tabs.Indicator className="bg-accent rounded-full" />
+              </Tabs.Tab>
+            ))}
+          </Tabs.List>
+        </Tabs.ListContainer>
+        <Tabs.Panel className="pt-4" id="overview">
+          <p>View your project overview and recent activity.</p>
+        </Tabs.Panel>
+        <Tabs.Panel className="pt-4" id="analytics">
+          <p>Track your metrics and analyze performance data.</p>
+        </Tabs.Panel>
+        <Tabs.Panel className="pt-4" id="reports">
+          <p>Generate and download detailed reports.</p>
+        </Tabs.Panel>
+        {SECTIONS.map((section) => (
+          <Tabs.Panel key={section.id} className="pt-4" id={section.id}>
+            {section.subModules && section.subModules.length > 0 ? (
+              <Tabs>
+                <Tabs.ListContainer>
+                  <Tabs.List className="*:data-[selected=true]:text-black grid grid-cols-5 gap-4 mb-6 bg-transparent">
+                    {section.subModules.map((sub) => (
+                      <Tabs.Tab
+                        key={sub.id}
+                        id={sub.id}
+                        onClick={() => setActiveSubModule(sub.id)}
+                        className="flex items-center gap-2 h-16 px-8 aspect-square justify-center border"
+                      >
+                        {sub.icon && (
+                          <sub.icon className="w-4 h-4" aria-hidden="true" />
+                        )}
+                        {sub.label}
+                        <Tabs.Indicator className="bg-accent" />
+                      </Tabs.Tab>
+                    ))}
+                  </Tabs.List>
+                </Tabs.ListContainer>
+              </Tabs>
+            ) : null}
+            {VIDEOS[section.id]["default"]?.map((video) => (
+              <div
+                key={video.id}
+                className={cn(
+                  "flex items-center gap-4 p-4 border rounded-lg cursor-pointer",
+                  viewedVideos.has(video.id) ? "bg-green-50" : "bg-white",
+                )}
+                onClick={() => handleVideoClick(video.id)}
+              >
+                <img
+                  src={video.thumb}
+                  alt={`${video.title} thumbnail`}
+                  className="w-24 h-16 object-cover rounded"
+                />
+                <div>
+                  <h3 className="font-medium">{video.title}</h3>
+                  <p className="text-sm text-muted">{video.description}</p>
+                  <span className="text-xs text-muted">{video.duration}</span>
+                </div>
+              </div>
+            ))}
+          </Tabs.Panel>
         ))}
-      </div>
-
-      {/* Info Footer */}
-      <GlassCard className="flex items-center gap-5 py-6 bg-accent/5 border-accent/10">
-        <div
-          className="p-3 bg-accent/10 rounded-full shrink-0"
-          aria-hidden="true"
-        >
-          <InfoIcon size={24} className="text-accent" />
-        </div>
-        <p className="text-muted-foreground text-sm leading-relaxed">
-          {m.guides_info?.() ??
-            "Todos os vídeos são otimizados para serem curtos e diretos, garantindo um aprendizado rápido e eficiente."}
-        </p>
-      </GlassCard>
+      </Tabs>
     </div>
-  );
-}
-
-// --- Sub-Components ---
-
-interface VideoCardProps {
-  video: (typeof TUTORIALS)[0];
-}
-
-function VideoCard({ video }: VideoCardProps) {
-  return (
-    <GlassButton
-      onClick={() => console.log(`Play video: ${video.id}`)}
-      // A11y: Combine title and duration for screen readers
-      aria-label={`Assistir vídeo: ${video.title}. Duração: ${video.duration}`}
-      className="group p-4 flex gap-4 items-center h-full hover:bg-surface/80"
-      role="listitem"
-    >
-      {/* Thumbnail Container */}
-      <div className="relative w-32 h-24 sm:w-40 sm:h-28 rounded-2xl overflow-hidden shrink-0 shadow-md bg-surface-secondary">
-        {/* Image: Grayscale by default, Color on Hover */}
-        <img
-          src={video.thumb}
-          alt="" // Decorative, the button label handles context
-          className={cn(
-            "w-full h-full object-cover transition-all duration-500",
-            "grayscale opacity-80", // Default: B&W and slightly dimmed
-            "group-hover:grayscale-0 group-hover:opacity-100 group-focus-visible:grayscale-0 group-focus-visible:opacity-100", // Hover/Focus: Color and Bright
-          )}
-        />
-
-        {/* Play Button Overlay */}
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="w-10 h-10 rounded-full bg-black/40 backdrop-blur-md flex items-center justify-center border border-white/20 group-hover:scale-110 group-hover:bg-accent group-hover:border-accent transition-all duration-300">
-            <PlayIcon size={18} className="text-white fill-current ml-1" />
-          </div>
-        </div>
-
-        {/* Duration Badge */}
-        <div className="absolute bottom-1 right-1 bg-black/80 text-[10px] px-2 py-0.5 rounded-md text-white font-mono border border-white/10 backdrop-blur-sm">
-          {video.duration}
-        </div>
-      </div>
-
-      {/* Text Content */}
-      <div className="flex-1 min-w-0 flex flex-col justify-center gap-2">
-        <h3 className="text-lg font-medium leading-tight group-hover:text-accent transition-colors truncate">
-          {video.title}
-        </h3>
-
-        <div className="flex items-center gap-2">
-          <div className="w-1.5 h-1.5 rounded-full bg-accent" />
-          <p className="text-muted-foreground text-xs font-bold uppercase tracking-widest">
-            {video.category}
-          </p>
-        </div>
-      </div>
-    </GlassButton>
   );
 }
