@@ -10,10 +10,10 @@ import {
   Vibrate,
   Wifi,
   ZapIcon,
-  PlayCircle,
-  CheckCircle2,
 } from "lucide-react";
-import { useState, useMemo } from "react";
+import { useMemo, useState } from "react";
+import type { VideoNode } from "./-VideoTimeline";
+import VideoTimeline from "./-VideoTimeline";
 
 export const Route = createFileRoute("/dashboard/guides/")({
   component: RouteComponent,
@@ -22,14 +22,6 @@ export const Route = createFileRoute("/dashboard/guides/")({
 // --- DATA & TYPES ---
 
 type SectionId = "basic" | "attachments" | "modules" | "advanced";
-
-interface VideoNode {
-  id: string;
-  title: string;
-  description: string;
-  duration: string;
-  thumb: string;
-}
 
 interface SubModule {
   id: string;
@@ -213,121 +205,6 @@ const VIDEOS: Record<string, Record<string, VideoNode[]>> = {
       },
     ],
   },
-};
-
-// --- TIMELINE COMPONENT ---
-
-const VideoTimeline = ({
-  videos,
-  viewedVideos,
-  onVideoClick,
-}: {
-  videos: VideoNode[];
-  viewedVideos: Set<string>;
-  onVideoClick: (id: string) => void;
-}) => {
-  if (!videos?.length)
-    return (
-      <div className="text-center py-10 opacity-50 text-muted">
-        Nenhum vídeo disponível.
-      </div>
-    );
-
-  return (
-    <div className="relative w-full max-w-5xl mx-auto py-8">
-      {/* The Timeline Line: Uses border color for neutrality */}
-      <div className="absolute top-0 bottom-0 left-6 md:left-1/2 w-0.5 bg-border -translate-x-1/2" />
-
-      <div className="flex flex-col gap-10">
-        {videos.map((video, idx) => {
-          const isEven = idx % 2 === 0;
-          const isViewed = viewedVideos.has(video.id);
-
-          return (
-            <div
-              key={video.id}
-              className={cn(
-                "relative flex w-full md:w-1/2",
-                // Desktop: Alternate sides
-                isEven
-                  ? "md:mr-auto md:pr-12 md:flex-row-reverse"
-                  : "md:ml-auto md:pl-12",
-                // Mobile: Always right of the line
-                "pl-14 md:pl-0",
-              )}
-            >
-              {/* The Dot */}
-              <div
-                className={cn(
-                  "absolute top-6 w-4 h-4 rounded-full border-2 z-10 transition-colors",
-                  isViewed
-                    ? "bg-accent border-accent"
-                    : "bg-muted border-transparent",
-                  // Dot Position Logic
-                  "left-6 md:left-auto", // Mobile fixed left
-                  isEven ? "md:-right-2" : "md:-left-2", // Desktop alternating
-                  "-translate-x-1/2",
-                )}
-              />
-
-              {/* The Card */}
-              <div
-                onClick={() => onVideoClick(video.id)}
-                className={cn(
-                  "group relative w-full bg-surface border border-border rounded-xl p-3 shadow-sm transition-all cursor-pointer flex gap-4",
-                  // Hover effects: subtle lift and border change using semantic colors
-                  "hover:shadow-md hover:border-default",
-                  "flex-col sm:flex-row",
-                )}
-              >
-                {/* Thumb */}
-                <div className="relative w-full sm:w-40 aspect-video rounded-lg overflow-hidden shrink-0 bg-default">
-                  <img
-                    src={video.thumb}
-                    alt={video.title}
-                    className="w-full h-full object-cover transition-transform group-hover:scale-105"
-                  />
-                  {/* Overlay using strict black/opacity for media contrast, or overlay var */}
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <PlayCircle className="text-white w-8 h-8" />
-                  </div>
-                  <span className="absolute bottom-1 right-1 bg-black/60 text-white text-[10px] px-1.5 rounded">
-                    {video.duration}
-                  </span>
-                </div>
-
-                {/* Text */}
-                <div
-                  className={cn(
-                    "flex flex-col justify-center",
-                    isEven
-                      ? "md:text-right md:items-end"
-                      : "md:text-left md:items-start",
-                    "text-left items-start",
-                  )}
-                >
-                  <h3
-                    className={cn(
-                      "font-semibold leading-tight flex items-center gap-2",
-                      isViewed ? "text-muted" : "text-foreground",
-                    )}
-                  >
-                    {video.title}
-                    {isViewed && (
-                      <CheckCircle2 className="w-4 h-4 text-success shrink-0" />
-                    )}
-                  </h3>
-                  <p className="text-sm text-muted mt-1 line-clamp-2">
-                    {video.description}
-                  </p>
-                </div>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    </div>
-  );
 };
 
 // --- MAIN COMPONENT ---
