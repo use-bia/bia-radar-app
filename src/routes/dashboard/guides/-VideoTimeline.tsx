@@ -58,7 +58,7 @@ const VideoTimeline: FunctionComponent<VideoTimelineProps> = ({
               */}
               <div
                 className={cn(
-                  "absolute left-8 md:left-1/2 w-6 h-px bg-border -z-10",
+                  "absolute left-0 md:left-1/2 w-6 h-px bg-border -z-10",
                   // Flip connector direction on desktop based on side
                   isEven ? "md:-translate-x-full" : "md:translate-x-0",
                 )}
@@ -67,7 +67,7 @@ const VideoTimeline: FunctionComponent<VideoTimelineProps> = ({
               {/* The Central Dot */}
               <div
                 className={cn(
-                  "absolute left-8 md:left-1/2 w-4 h-4 rounded-full border-2 z-10 transition-all duration-300 shadow-sm -translate-x-1/2",
+                  "absolute left-0 md:left-1/2 w-4 h-4 rounded-full border-2 z-10 transition-all duration-300 shadow-sm -translate-x-1/2",
                   isViewed
                     ? "bg-accent border-accent shadow-[0_0_10px_rgba(var(--accent),0.5)] scale-110"
                     : "bg-surface border-border",
@@ -85,7 +85,7 @@ const VideoTimeline: FunctionComponent<VideoTimelineProps> = ({
               */}
               <div
                 className={cn(
-                  "w-full", // Mobile: Space for line on left
+                  "w-full ml-6 md:ml-0", // Mobile: Space for line on left
                   isEven
                     ? "md:pr-6 md:mr-auto md:w-1/2"
                     : "md:pl-6 md:ml-auto md:w-1/2",
@@ -98,9 +98,9 @@ const VideoTimeline: FunctionComponent<VideoTimelineProps> = ({
                     isViewed ? "opacity-80 hover:opacity-100" : "",
                   )}
                 >
-                  <div className="flex flex-col lg:flex-row gap-5 items-start sm:items-center w-full">
+                  <div className="flex flex-col sm:flex-row md:flex-col xl:flex-row gap-5 items-start sm:items-center w-full">
                     {/* Thumbnail Section */}
-                    <div className="relative w-full lg:w-40 aspect-video rounded-4xl overflow-hidden shrink-0 bg-black/10 border border-white/5 shadow-inner">
+                    <div className="relative w-full sm:w-40 md:w-full xl:w-40 aspect-video rounded-4xl overflow-hidden shrink-0 bg-black/10 border border-white/5 shadow-inner">
                       <img
                         src={video.thumb}
                         alt={video.title}

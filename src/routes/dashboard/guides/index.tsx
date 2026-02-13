@@ -239,13 +239,13 @@ function RouteComponent() {
       <Tabs
         selectedKey={activeSection}
         onSelectionChange={handleSectionChange}
-        className="w-full items-center sticky top-0 py-4 z-20"
+        className="items-center w-full top-0 py-4"
       >
-        <Tabs.ListContainer>
+        <Tabs.ListContainer className="w-full sm:w-auto">
           <Tabs.List
             aria-label="Options"
             className={cn(
-              "h-16 rounded-full p-2 w-fit mx-auto border",
+              "rounded-4xl sm:rounded-full p-1 sm:p-2 gap-2 border",
               // Semantic Colors: Surface for card-like bg, Border for outline
               "bg-surface border-border",
               // Text colors handling
@@ -256,13 +256,16 @@ function RouteComponent() {
               <Tabs.Tab
                 key={section.id}
                 id={section.id}
-                className="flex items-center gap-2 h-full rounded-full px-8 transition-all"
+                className="flex flex-col sm:flex-row items-center min-w-16 sm:min-w-auto gap-2 h-full rounded-3xl sm:rounded-full py-3 sm:py-4 px-4 sm:px-6 lg:px-8 transition-all"
               >
                 {section.icon && (
-                  <section.icon className="w-4 h-4" aria-hidden="true" />
+                  <section.icon
+                    className="w-5 h-5 sm:w-4 sm:h-4"
+                    aria-hidden="true"
+                  />
                 )}
                 {section.label}
-                <Tabs.Indicator className="bg-accent rounded-full" />
+                <Tabs.Indicator className="bg-accent rounded-3xl sm:rounded-full" />
               </Tabs.Tab>
             ))}
           </Tabs.List>
@@ -273,7 +276,7 @@ function RouteComponent() {
           <Tabs.Panel
             key={section.id}
             id={section.id}
-            className="w-full px-4 pt-4 max-w-5xl"
+            className="w-full px-4 pt-4"
           >
             {/* SUBMODULE TABS (Only if present) */}
             {section.subModules && section.subModules.length > 0 ? (
