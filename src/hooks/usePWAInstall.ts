@@ -1,62 +1,54 @@
-import { useState, useEffect, useCallback } from "react";
-
-interface BeforeInstallPromptEvent extends Event {
-  prompt: () => Promise<void>;
-  userChoice: Promise<{ outcome: "accepted" | "dismissed"; platform: string }>;
-}
+import { pwaInstallHandler } from "pwa-install-handler";
+import { useCallback, useSyncExternalStore, useMemo } from "react";
 
 export const usePWAInstall = () => {
-  const [deferredPrompt, setDeferredPrompt] =
-    useState<BeforeInstallPromptEvent | null>(null);
-  const [isIOS, setIsIOS] = useState(false);
-  const [isStandalone, setIsStandalone] = useState(false);
-
-  useEffect(() => {
-    // 1. Check if the app is already installed (standalone mode)
-    const isStandaloneMode =
-      window.matchMedia("(display-mode: standalone)").matches ||
-      (window.navigator as any).standalone === true;
-
-    setIsStandalone(isStandaloneMode);
-
-    // 2. Check if the device is iOS
-    const userAgent = window.navigator.userAgent.toLowerCase();
-    const isIosDevice = /iphone|ipad|ipod/.test(userAgent);
-    setIsIOS(isIosDevice);
-
-    // 3. Listen for the Chromium 'beforeinstallprompt' event
-    const handleBeforeInstallPrompt = (e: Event) => {
-      e.preventDefault();
-      setDeferredPrompt(e as BeforeInstallPromptEvent);
-    };
-
-    window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
-
+  // 1. Subscribe to the library's updates
+  const subscribe = useCallback((callback: () => void) => {
+    pwaInstallHandler.addListener(callback);
     return () => {
-      window.removeEventListener(
-        "beforeinstallprompt",
-        handleBeforeInstallPrompt,
-      );
+      pwaInstallHandler.removeListener(callback);
     };
   }, []);
 
+  // 2. Snapshot: Returns the current installability status
+  // We return a simple boolean here to ensure referential stability
+  const getSnapshot = useCallback(() => {
+    return pwaInstallHandler.canInstall();
+  }, []);
+
+  // 3. Server Snapshot: Always false during SSR
+  const getServerSnapshot = useCallback(() => false, []);
+
+  // 4. Get the current state
+  const canInstall = useSyncExternalStore(
+    subscribe,
+    getSnapshot,
+    getServerSnapshot,
+  );
+
+  // 5. Wrap the install action
   const promptInstall = useCallback(async () => {
-    // If it's Chrome/Edge, trigger the native prompt
-    if (deferredPrompt) {
-      await deferredPrompt.prompt();
-      const { outcome } = await deferredPrompt.userChoice;
-      setDeferredPrompt(null);
-      return outcome;
+    if (canInstall) {
+      // The library handles the native prompt or the manual instructions
+      const result = await pwaInstallHandler.install();
+      return result;
     }
-    // If it's not supported (Safari/Firefox), we return null
-    // The UI should handle showing instructions in this case
-    return null;
-  }, [deferredPrompt]);
+    return false;
+  }, [canInstall]);
+
+  // 6. Derive "installType" to maintain backward compatibility with your UI
+  // If the library has a captured event, it's "native".
+  // If it can install but has no event (like iOS), it's "manual".
+  const installType = useMemo(() => {
+    if (!canInstall) return null;
+    return pwaInstallHandler.getEvent()
+      ? ("native" as const)
+      : ("manual" as const);
+  }, [canInstall]);
 
   return {
-    // Show banner if: (We have a native prompt OR we are on iOS) AND (We are not already installed)
-    isInstallAvailable: (!!deferredPrompt || isIOS) && !isStandalone,
-    installType: deferredPrompt ? ("native" as const) : ("manual" as const),
+    isInstallAvailable: canInstall,
+    installType,
     promptInstall,
   };
 };
