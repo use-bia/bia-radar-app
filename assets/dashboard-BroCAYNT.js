@@ -1,0 +1,1 @@
+import{g as o}from"./index-CNVq94zR.js";const e=()=>"Loading",t=()=>"Carregando",d=(r={},n={})=>(n.locale??o())==="en"?e():t(),l=()=>"Dashboard",s=()=>"Painel de Controle",i=(r={},n={})=>(n.locale??o())==="en"?l():s();export{i as d,d as l};
