@@ -1,4 +1,5 @@
 import { useAudio } from "@/hooks/useAudio";
+import { usePWAInstall } from "@/hooks/usePWAInstall"; // Import the new hook
 import { m } from "@/paraglide/messages";
 import { AlertDialog, Button, cn, Tooltip } from "@heroui/react";
 import { DownloadIcon, XIcon } from "lucide-react";
@@ -11,14 +12,24 @@ interface DownloadBannerProps {
 const DownloadBanner: FunctionComponent<DownloadBannerProps> = ({
   className,
 }) => {
-  const [isDownloadAvailable, _] = useState(true);
+  // Use the custom hook
+  const { isInstallAvailable, promptInstall } = usePWAInstall();
+
+  // Local state for UI dismissal (user clicked X)
   const [isDismissed, setIsDismissed] = useState(false);
 
   const playDownload = useAudio("download_app");
   const playOpenDialog = useAudio("open_dialog");
   const playCloseDialog = useAudio("close_dialog");
 
-  if (!isDownloadAvailable || isDismissed) {
+  const handleDownloadClick = () => {
+    playDownload();
+    promptInstall();
+  };
+
+  // Don't render if browser says no (isInstallAvailable is false)
+  // OR if user said no (isDismissed is true)
+  if (!isInstallAvailable || isDismissed) {
     return null;
   }
 
@@ -43,9 +54,7 @@ const DownloadBanner: FunctionComponent<DownloadBannerProps> = ({
             "bg-accent-button text-accent-button-foreground shadow-md hover:bg-accent-button/90"
           }
           size="md"
-          onClick={() => {
-            playDownload();
-          }}
+          onClick={handleDownloadClick}
         >
           <DownloadIcon className="mr-1" />
           <span>{m.download_app()}</span>

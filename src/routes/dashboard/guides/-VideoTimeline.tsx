@@ -1,6 +1,6 @@
 import { GlassButton } from "@/components/GlassCard";
 import { cn } from "@heroui/react";
-import { CheckCircle2, PlayIcon } from "lucide-react";
+import { PlayIcon } from "lucide-react";
 import type { FunctionComponent } from "react";
 
 export interface VideoNode {
@@ -58,9 +58,10 @@ const VideoTimeline: FunctionComponent<VideoTimelineProps> = ({
               */}
               <div
                 className={cn(
-                  "absolute left-0 md:left-1/2 w-6 h-px bg-border -z-10",
+                  "absolute left-0 md:left-1/2 w-6 h-px -z-10",
                   // Flip connector direction on desktop based on side
                   isEven ? "md:-translate-x-full" : "md:translate-x-0",
+                  isViewed ? "bg-accent" : "bg-border",
                 )}
               />
 
@@ -94,11 +95,18 @@ const VideoTimeline: FunctionComponent<VideoTimelineProps> = ({
                 <GlassButton
                   onClick={() => onVideoClick(video.id)}
                   className={cn(
-                    "w-full p-5 xl:p-4 group h-auto", // Override p-6 if too large, ensure height adapts
-                    isViewed ? "opacity-80 hover:opacity-100" : "",
+                    "w-full p-5 xl:p-4 group h-auto",
+                    isViewed
+                      ? cn(
+                          "opacity-80 hover:opacity-100 border-l-4 border-l-accent",
+                          isEven
+                            ? "md:border-r-4 md:border-r-accent md:border-l-border md:border-l"
+                            : "",
+                        )
+                      : "",
                   )}
                 >
-                  <div className="flex flex-col sm:flex-row md:flex-col xl:flex-row gap-5 items-start sm:items-center w-full">
+                  <div className="flex flex-col sm:flex-row md:flex-col xl:flex-row gap-4 items-start sm:items-center w-full">
                     {/* Thumbnail Section */}
                     <div className="relative w-full sm:w-40 md:w-full xl:w-32 rounded-4xl overflow-hidden shrink-0 bg-black/10 border border-white/5 shadow-inner">
                       <img
@@ -141,9 +149,6 @@ const VideoTimeline: FunctionComponent<VideoTimelineProps> = ({
                         >
                           {video.title}
                         </h3>
-                        {isViewed && (
-                          <CheckCircle2 className="w-5 h-5 text-accent shrink-0 animate-in zoom-in spin-in-12" />
-                        )}
                       </div>
 
                       <p className="text-sm text-muted-foreground line-clamp-2 leading-relaxed">

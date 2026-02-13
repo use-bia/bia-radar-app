@@ -4,6 +4,7 @@ import { Description, Dropdown, Header, Label, Separator } from "@heroui/react";
 import { useNavigate } from "@tanstack/react-router";
 import {
   CircleIcon,
+  DownloadIcon,
   LogOutIcon,
   MoonStarIcon,
   PaletteIcon,
@@ -14,6 +15,7 @@ import {
 import type { FunctionComponent } from "react";
 import { useAudioSettings } from "@/contexts/AudioSettingsContext";
 import { m } from "@/paraglide/messages";
+import { usePWAInstall } from "@/hooks/usePWAInstall";
 
 // --- Configuration ---
 
@@ -76,6 +78,7 @@ const HeaderButtonMenu: FunctionComponent<HeaderButtonMenuProps> = ({
   const playCloseDialog = useAudio("close_dialog");
   const playToggle = useAudio("toggle_theme");
   const navigate = useNavigate();
+  const { isInstallAvailable, promptInstall } = usePWAInstall();
   const { enabled: enabledAudio, toggle: toggleAudio } = useAudioSettings();
 
   const { setTheme, setContrastColor } = useTheme();
@@ -153,6 +156,19 @@ const HeaderButtonMenu: FunctionComponent<HeaderButtonMenuProps> = ({
                 {enabledAudio ? m.disable() : m.enable()} {m.sounds()}
               </Label>
             </Dropdown.Item>
+            {isInstallAvailable && (
+              <Dropdown.Item
+                id="install-pwa"
+                textValue="Install app"
+                onClick={() => {
+                  promptInstall();
+                }}
+                aria-label={m.install_app()}
+              >
+                <DownloadIcon className="size-4 shrink-0 text-muted" />
+                <Label>{m.install_app()}</Label>
+              </Dropdown.Item>
+            )}
           </Dropdown.Section>
           <Dropdown.Section>
             <Header>Opções de tema</Header>
