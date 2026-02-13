@@ -25,7 +25,7 @@ const VideoTimeline: FunctionComponent<VideoTimelineProps> = ({
   if (!videos?.length)
     return (
       <div className="text-center py-20 opacity-50 text-muted italic">
-        Select a module to view guides.
+        Nenhum vídeo disponível no momento. Por favor, volte mais tarde!
       </div>
     );
 
@@ -94,13 +94,13 @@ const VideoTimeline: FunctionComponent<VideoTimelineProps> = ({
                 <GlassButton
                   onClick={() => onVideoClick(video.id)}
                   className={cn(
-                    "w-full p-5 group h-auto", // Override p-6 if too large, ensure height adapts
+                    "w-full p-5 xl:p-4 group h-auto", // Override p-6 if too large, ensure height adapts
                     isViewed ? "opacity-80 hover:opacity-100" : "",
                   )}
                 >
                   <div className="flex flex-col sm:flex-row md:flex-col xl:flex-row gap-5 items-start sm:items-center w-full">
                     {/* Thumbnail Section */}
-                    <div className="relative w-full sm:w-40 md:w-full xl:w-40 aspect-video rounded-4xl overflow-hidden shrink-0 bg-black/10 border border-white/5 shadow-inner">
+                    <div className="relative w-full sm:w-40 md:w-full xl:w-32 rounded-4xl overflow-hidden shrink-0 bg-black/10 border border-white/5 shadow-inner">
                       <img
                         src={video.thumb}
                         alt={video.title}
@@ -133,7 +133,7 @@ const VideoTimeline: FunctionComponent<VideoTimelineProps> = ({
                       <div className="flex items-center justify-between gap-2">
                         <h3
                           className={cn(
-                            "font-semibold text-lg leading-tight truncate pr-2",
+                            "font-semibold text-lg leading-tight xl:line-clamp-2 pr-2",
                             isViewed
                               ? "text-muted-foreground decoration-line-through decoration-border"
                               : "text-foreground",
